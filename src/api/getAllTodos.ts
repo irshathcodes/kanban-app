@@ -1,5 +1,5 @@
-import request from "../utils/axios-instance";
-import Todos, { GetAllTodoResponse } from "../models/todos";
+import request from "../helpers/axios-instance";
+import Todos, { GetAllTodoResponse } from "../models/Todos";
 
 export default async function getTodos(url?: string) {
 	const res = await request.get(url ? `/todo/?board=${url}` : "/todo");

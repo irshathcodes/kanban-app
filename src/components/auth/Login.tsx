@@ -1,36 +1,42 @@
 import { useState, useEffect } from "react";
-import request from '../../utils/axios-instance';
-import {useNavigate} from 'react-router-dom';
+import request from "../../helpers/axios-instance";
+import { useNavigate } from "react-router-dom";
+import Button from "../ui/Button";
 
 export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-   const [error, setError] = useState("");
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
 
-   const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-
-      request.post("/auth/login", {email, password}).then((res) => {  
-         const username = res.data
-         navigate("/", {state: username, replace: true});
-      }).catch((err) => {
-         if(err.response.status === 401){
-            setError(err.response.data.msg);
-         }
-      })
+		setLoading(true);
+		request
+			.post("/auth/login", { email, password })
+			.then((res) => {
+				const username = res.data;
+				setLoading(false);
+				navigate("/", { state: username, replace: true });
+			})
+			.catch((err) => {
+				setLoading(false);
+				if (err?.response.status === 401) setError(err.response.data.msg);
+				else setError("Something went wrong, Try again later");
+			});
 	};
 
-   useEffect(() => {
-      const timeout = setTimeout(() => {
-         setError("");
-      }, 3000)
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			setError("");
+		}, 3000);
 
-      return () => {
-         clearTimeout(timeout);
-      }
-   }, [error])
+		return () => {
+			clearTimeout(timeout);
+		};
+	}, [error]);
 	return (
 		<>
 			<div className="flex h-screen flex-col items-center bg-gray-50 pt-20 ">
@@ -39,7 +45,7 @@ export default function Login() {
 						Sign in to your account
 					</h1>
 					<form onSubmit={handleSubmit}>
-						<div className="my-4 flex flex-col gap-1">
+						<div className="my-6 flex flex-col gap-1">
 							<label
 								htmlFor="email"
 								className="text-[15px] font-semibold text-slate-600"
@@ -75,15 +81,12 @@ export default function Login() {
 							/>
 						</div>
 
-						<button
-							type="submit"
-							className="my-4 w-full rounded bg-primary-600 py-1 font-semibold text-slate-100 ring-primary-100 focus:outline-primary-100 focus:ring-2"
-						>
-							Sign in
-						</button>
+						<Button type="submit" loader={loading}>
+							{loading ? "Signing in..." : "Sign in"}
+						</Button>
 					</form>
 
-               {error && <p className="text-center text-red-600">{error}</p>}
+					{error && <p className="text-center text-red-600">{error}</p>}
 				</div>
 			</div>
 		</>
