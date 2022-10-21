@@ -7,7 +7,7 @@ export default function Navbar({
 	heading: string | undefined;
 }) {
 	return (
-		<nav className="flex justify-between items-center gap-2 px-4 py-3 dark:bg-zinc-800">
+		<nav className="flex sticky top-0 z-10 justify-between items-center gap-2 px-4 py-3 dark:bg-zinc-800">
 			<h1 className="text-slate-100 font-semibold text-lg">{heading}</h1>
 			<div className="flex gap-6 items-center">
 				<Link to="/login">

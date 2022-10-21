@@ -21,7 +21,7 @@ export default function Home() {
 	const allBoards = getAllBoards(allTodos);
 
 	const filteredTodo = allTodos?.filter(
-		(todo) => todo.kanbanBoard === allBoards![board]
+		(todo) => todo.kanbanBoard === allBoards[board]
 	);
 
 	const changeBoard = (index: number) => {
@@ -30,7 +30,12 @@ export default function Home() {
 
 	return (
 		<>
-			<Outlet />
+			<Outlet
+				context={{
+					board: (allBoards && allBoards[board]) || 0,
+					status: allStatus,
+				}}
+			/>
 			<div className="grid grid-cols-[270px_1fr] bg-neutral-900">
 				<Sidebar
 					allBoards={allBoards}

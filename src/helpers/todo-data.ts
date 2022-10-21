@@ -15,5 +15,8 @@ export const getAllStatus = (allTodos: Todos[] | undefined) => {
 };
 
 export const getAllBoards = (allTodos: Todos[] | undefined) => {
-	return allTodos?.map((item) => item.kanbanBoard);
+	const allBoards = allTodos?.map((item) => item.kanbanBoard);
+
+	const uniqueBoards = [...new Set(allBoards)];
+	return uniqueBoards;
 };

@@ -1,8 +1,10 @@
-export default function Loader() {
+export default function Loader({ className }: { className?: string }) {
 	return (
 		<svg
 			role="status"
-			className="inline mr-3 w-4 h-4 text-white animate-spin"
+			className={`inline mr-3 w-4 h-4 text-white animate-spin ${
+				className && className
+			}`}
 			viewBox="0 0 100 101"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"

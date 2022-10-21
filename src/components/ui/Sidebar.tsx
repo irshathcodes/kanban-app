@@ -1,8 +1,7 @@
 import kanbanLogo from "../../assets/kanban-logo.png";
-import { useQueryClient } from "@tanstack/react-query";
 import { v4 as getId } from "uuid";
 import { RectangleGroupIcon } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
+import CreateBoard from "../kanban-board/CreateBoard";
 
 interface Props {
 	allBoards: string[] | undefined;
@@ -16,7 +15,7 @@ export default function Sidebar({
 	changeBoard,
 }: Props) {
 	return (
-		<aside className="pr-2  bg-zinc-800 h-screen border border-zinc-800 border-r-gray-500">
+		<aside className="pr-2 sticky top-0	 bg-zinc-800 h-screen border border-zinc-800 border-r-gray-500">
 			<div className="h-14 pl-6 flex gap-2 items-center">
 				<img src={kanbanLogo} alt="kanban logo" width={24} height={24} />
 				<h1 className="text-slate-200 font-bold text-2xl">Kanban</h1>
@@ -48,6 +47,8 @@ export default function Sidebar({
 					);
 				})}
 			</ul>
+
+			<CreateBoard />
 		</aside>
 	);
 }
