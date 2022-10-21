@@ -61,8 +61,8 @@ export default function CreateBoard() {
 				className="pl-6 my-3 text-primary-500/80"
 			>
 				<div className="flex items-center  font-medium">
-					<PlusIcon className="w-4 h-4" />
-					Create new board
+					{!showInput && <PlusIcon className="w-4 h-4" />}
+					{showInput ? "Cancel" : "Create new board"}
 				</div>
 			</button>
 		</>

@@ -1,11 +1,8 @@
 import { useState } from "react";
-import Card from "../ui/Card";
-import Navbar from "../ui/Navbar";
-import Sidebar from "../ui/Sidebar";
+import { Card, Navbar, Sidebar } from "../ui/Index";
 import { useQuery } from "@tanstack/react-query";
 import getAllTodos from "../../api/getAllTodos";
 import { v4 as getId } from "uuid";
-import Todos from "../../models/Todos";
 import { Outlet } from "react-router-dom";
 import { getAllBoards, getAllStatus } from "../../helpers/todo-data";
 
