@@ -1,11 +1,11 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Input, Label, Button, Select, Modal } from "../ui/Index";
 import { CreateTask, CreateSubTask } from "../../models/Todos";
-import DynamicInput from "./DynamicInput";
 import createTask from "../../api/createTask";
+import SubTasks from "./SubTasks";
 
 export default function CreateTodo() {
 	const navigate = useNavigate();
@@ -19,9 +19,11 @@ export default function CreateTodo() {
 	});
 
 	const [subTasks, setsubTasks] = useState<CreateSubTask[]>([
-		{ subtask: "" },
-		{ subtask: "" },
+		{ subTask: "" },
+		{ subTask: "" },
 	]);
+	const titleRef = useRef<HTMLInputElement>(null);
+
 	const [data, setData] = useState<CreateTask>({
 		todoName: "",
 		description: "",
@@ -37,17 +39,26 @@ export default function CreateTodo() {
 		e.preventDefault();
 
 		const createTask = {} as CreateTask;
+		if (!board) createTask.kanbanBoard = "my tasks";
+		else createTask.kanbanBoard = board;
 
-		createTask.kanbanBoard = board;
 		createTask.todoName = data.todoName.trim();
-		if (subTasks.length > 0) createTask.subTasks = subTasks;
+
+		const enteredSubTasks = subTasks.filter(
+			(item) => item.subTask.trim().length > 0
+		);
+
+		if (enteredSubTasks.length > 0) createTask.subTasks = enteredSubTasks;
 
 		if (data.description?.trim())
 			createTask.description = data.description.trim();
-
+		console.log(createTask);
 		mutate(createTask);
 	};
 
+	useEffect(() => {
+		titleRef.current?.focus();
+	}, []);
 	return (
 		<Modal>
 			<form onSubmit={handleSubmit} className="text-slate-200">
@@ -63,7 +74,9 @@ export default function CreateTodo() {
 					placeholder="eg: take coffee break"
 					name="todoName"
 					value={data.todoName}
+					ref={titleRef}
 					onChange={(e) => setData({ ...data, todoName: e.target.value })}
+					required={true}
 				/>
 
 				<Label name="description" />
@@ -75,11 +88,11 @@ export default function CreateTodo() {
 				></textarea>
 
 				<Label name="subtasks" />
-				<DynamicInput subTasks={subTasks} setsubTasks={setsubTasks} />
+				<SubTasks subTasks={subTasks} setsubTasks={setsubTasks} />
 
 				<Button
 					className="my-0 mb-2 bg-transparent w-fit text-sm text-slate-300 px-4"
-					onClick={() => setsubTasks([...subTasks, { subtask: "" }])}
+					onClick={() => setsubTasks([...subTasks, { subTask: "" }])}
 				>
 					Add more tasks
 				</Button>

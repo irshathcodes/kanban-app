@@ -3,11 +3,12 @@ import { Card, Navbar, Sidebar } from "../ui/Index";
 import { useQuery } from "@tanstack/react-query";
 import getAllTodos from "../../api/getAllTodos";
 import { v4 as getId } from "uuid";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { getAllBoards, getAllStatus } from "../../helpers/todo-data";
 
-export default function Home() {
+export default function TaskList() {
 	const [board, setBoard] = useState(0);
+	const navigate = useNavigate();
 	const { data: allTodos, isLoading } = useQuery(
 		["fetch-all-todos"],
 		() => getAllTodos(),
@@ -25,11 +26,17 @@ export default function Home() {
 		setBoard(index);
 	};
 
+	const handleCardClick = (id: string) => {
+		const task = allTodos?.filter((task) => task._id === id)[0];
+
+		navigate("/update-task", { state: { task, allStatus } });
+	};
+
 	return (
 		<>
 			<Outlet
 				context={{
-					board: (allBoards && allBoards[board]) || 0,
+					board: allBoards && allBoards[board],
 					status: allStatus,
 				}}
 			/>
@@ -58,7 +65,11 @@ export default function Home() {
 										</h3>
 
 										{data?.map((item) => (
-											<Card key={item._id} heading={item.todoName} />
+											<Card
+												heading={item.todoName}
+												onClick={() => handleCardClick(item._id)}
+												key={item._id}
+											/>
 										))}
 									</section>
 								);

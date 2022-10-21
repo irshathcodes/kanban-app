@@ -1,5 +1,5 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { ChangeEvent, FormEvent, MouseEventHandler } from "react";
+import { ChangeEvent } from "react";
 import { CreateSubTask } from "../../models/Todos";
 import Input from "../ui/Input";
 
@@ -10,10 +10,10 @@ interface Props {
 
 const subTaskPlaceholders = ["eg: make coffee", "eg: drink coffee and smile"];
 
-export default function DynamicInput({ subTasks, setsubTasks }: Props) {
+export default function SubTasks({ subTasks, setsubTasks }: Props) {
 	const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
 		const inputData = [...subTasks];
-		inputData[index].subtask = e.target.value;
+		inputData[index].subTask = e.target.value;
 		setsubTasks(inputData);
 	};
 
@@ -30,8 +30,8 @@ export default function DynamicInput({ subTasks, setsubTasks }: Props) {
 						<Input
 							placeholder={subTaskPlaceholders[i]}
 							className="mb-0"
-							name={`subtask-${i}`}
-							value={input.subtask}
+							name={`subTask-${i}`}
+							value={input.subTask}
 							onChange={(e) => handleChange(e, i)}
 						/>
 						<button onClick={() => handleRemove(i)}>

@@ -1,23 +1,21 @@
 import { useEffect, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+import useEscape from "../hooks/useEscape";
 
 export default function Modal({ children }: { children: ReactNode }) {
 	const navigate = useNavigate();
+	const escape = useEscape();
 
 	const back = () => {
-		navigate(-1);
+		navigate("/");
 	};
 
 	useEffect(() => {
-		const handleEscapeEvent = (e: KeyboardEvent) => {
-			if (e.code === "Escape") {
-				back();
-			}
-		};
-		window.addEventListener("keydown", handleEscapeEvent);
+		if (escape) {
+			back();
+		}
+	}, [escape]);
 
-		return () => window.removeEventListener("keydown", handleEscapeEvent);
-	}, []);
 	return (
 		<>
 			<div
