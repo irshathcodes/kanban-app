@@ -5,7 +5,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Input, Label, Button, Select, Modal } from "../ui/Index";
 import { CreateTask, CreateSubTask } from "../../models/Todos";
 import createTask from "../../api/createTask";
-import SubTasks from "./SubTasks";
+import SubTaskInput from "./SubTaskInput";
 
 export default function CreateTodo() {
 	const navigate = useNavigate();
@@ -88,10 +88,10 @@ export default function CreateTodo() {
 				></textarea>
 
 				<Label name="subtasks" />
-				<SubTasks subTasks={subTasks} setsubTasks={setsubTasks} />
+				<SubTaskInput subTasks={subTasks} setsubTasks={setsubTasks} />
 
 				<Button
-					className="my-0 mb-2 bg-transparent w-fit text-sm text-slate-300 px-4"
+					className="!my-0 mb-2 w-fit text-sm text-slate-300 px-4 !bg-transparent"
 					onClick={() => setsubTasks([...subTasks, { subTask: "" }])}
 				>
 					Add more tasks
