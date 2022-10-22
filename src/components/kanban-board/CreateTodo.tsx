@@ -1,22 +1,16 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Input, Label, Button, Select, Modal } from "../ui/Index";
 import { CreateTask, CreateSubTask } from "../../models/Todos";
 import createTask from "../../api/createTask";
 import SubTaskInput from "./SubTaskInput";
+import useMutateTask from "../hooks/useMutateTask";
 
 export default function CreateTodo() {
 	const navigate = useNavigate();
 
-	const queryClient = useQueryClient();
-	const { mutate, isLoading, isError } = useMutation(createTask, {
-		onSuccess: () => {
-			queryClient.invalidateQueries(["fetch-all-todos"]);
-			navigate("/");
-		},
-	});
+	const { mutate, isLoading, isError } = useMutateTask(createTask);
 
 	const [subTasks, setsubTasks] = useState<CreateSubTask[]>([
 		{ subTask: "" },
@@ -49,10 +43,9 @@ export default function CreateTodo() {
 		);
 
 		if (enteredSubTasks.length > 0) createTask.subTasks = enteredSubTasks;
-
 		if (data.description?.trim())
 			createTask.description = data.description.trim();
-		console.log(createTask);
+
 		mutate(createTask);
 	};
 

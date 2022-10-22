@@ -20,8 +20,9 @@ export default function CreateBoard() {
 		e.preventDefault();
 		const task = {} as CreateTask;
 
-		task.todoName = "Example";
-		task.kanbanBoard = inputRef.current!.value;
+		if (inputRef.current) {
+			task.kanbanBoard = inputRef.current.value;
+		}
 
 		mutate(task);
 	};

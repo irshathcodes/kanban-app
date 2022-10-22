@@ -51,7 +51,7 @@ export default function TaskList() {
 					<main>
 						<div className="flex p-6 gap-6">
 							{allStatus?.map((status, i) => {
-								const data = filteredTodo?.filter(
+								const tasks = filteredTodo?.filter(
 									(todo) => todo.status === status
 								);
 
@@ -60,15 +60,16 @@ export default function TaskList() {
 										<h3 className="text-slate-400 uppercase text-sm pl-1 font-semibold tracking-wide flex items-center">
 											<span className={`circle circle-${i + 1}`}></span>
 											<span className="inline-block">
-												{status} ({data?.length || 0})
+												{status} ({tasks?.length || 0})
 											</span>
 										</h3>
 
-										{data?.map((item) => (
+										{tasks?.map((task) => (
 											<Card
-												heading={item.todoName}
-												onClick={() => handleCardClick(item._id)}
-												key={item._id}
+												heading={task.todoName}
+												subTasks={task.subTasks}
+												onClick={() => handleCardClick(task._id)}
+												key={task._id}
 											/>
 										))}
 									</section>

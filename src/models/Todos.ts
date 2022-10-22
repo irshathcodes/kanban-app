@@ -32,3 +32,8 @@ export interface SubTasks {
 	subTask: string;
 	_id: string;
 }
+
+export interface UpdateTaskRequest {
+	status: string;
+	subTasks: SubTasks[];
+}
