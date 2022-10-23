@@ -37,3 +37,18 @@ export interface UpdateTaskRequest {
 	status: string;
 	subTasks: SubTasks[];
 }
+
+export interface CreateBoard {
+	board: string;
+}
+
+export interface GetAllBoards {
+	boards: Board[];
+}
+
+export interface Board {
+	_id: string;
+	board: string;
+	userId: string;
+	__v: number;
+}

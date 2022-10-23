@@ -1,19 +1,28 @@
 import { useState } from "react";
 import { Card, Navbar, Sidebar } from "../ui/Index";
-import { useQuery } from "@tanstack/react-query";
-import getAllTodos from "../../api/getAllTodos";
+import { useQueries } from "@tanstack/react-query";
+import getAllTasks from "../../api/getAllTasks";
+import getAllBoards from "../../api/getAllBoards";
 import { v4 as getId } from "uuid";
 import { Outlet, useNavigate } from "react-router-dom";
-import { getAllBoards, getAllStatus } from "../../helpers/todo-data";
+import { getAllStatus } from "../../helpers/todo-data";
 
 export default function TaskList() {
 	const [board, setBoard] = useState(0);
 	const navigate = useNavigate();
+
 	const { data: allTodos, isLoading } = useQuery(
-		["fetch-all-todos"],
-		() => getAllTodos(),
+		["fetch-tasks"],
+		() => getAllTasks(),
 		{}
 	);
+
+	const {} = useQueries({
+		queries: [
+			{ queryKey: ["fetch-tasks"], queryFn: getAllTasks },
+			{ queryKey: ["fetch-boards"], queryFn: getAllBoards },
+		],
+	});
 
 	const allStatus = getAllStatus(allTodos);
 	const allBoards = getAllBoards(allTodos);

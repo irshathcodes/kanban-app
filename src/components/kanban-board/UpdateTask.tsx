@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import Todos from "../../models/Todos";
 import updateTask from "../../api/updateTask";
 import useMutateTask from "../hooks/useMutateTask";
+import deleteTask from "../../api/deleteTask";
 
 interface State {
 	task: Todos;
@@ -26,6 +27,11 @@ export default function UpdateTask() {
 	const [error, setError] = useState("");
 
 	const { mutate, isLoading, isError } = useMutateTask(updateTask);
+	const {
+		mutate: deleteMutate,
+		isLoading: isDeleting,
+		isError: isDeleteError,
+	} = useMutateTask(deleteTask);
 
 	if (isError) {
 		setError("something went wrong, please try again later");
@@ -108,9 +114,19 @@ export default function UpdateTask() {
 					style={{ cursor: allStatus.length < 4 ? "not-allowed" : "pointer" }}
 				/>
 
-				<Button type="submit" loader={isLoading}>
-					Update Task
-				</Button>
+				<div>
+					<Button type="submit" loader={isLoading}>
+						Update Task
+					</Button>
+
+					<Button
+						onClick={() => deleteMutate(_id)}
+						loader={isDeleting}
+						className="!bg-transparent mt-0 transition-all hover:text-red-500/70 text-red-500/90 hover:text-red-500"
+					>
+						Delete Task
+					</Button>
+				</div>
 			</form>
 			<p className="text-center text-red-500 font-medium">{error && error}</p>
 		</Modal>

@@ -30,7 +30,7 @@ export default function Modal({
 			></div>
 
 			<div
-				className={`w-[32rem] fixed max-h-[90%] z-50 top-1/2 left-1/2 -translate-x-2/4 -translate-y-1/2 bg-zinc-800  rounded-lg  px-8 py-4 overflow-auto ${
+				className={`w-[32rem]  fixed max-h-[90%] z-50 top-1/2 left-1/2 -translate-x-2/4 -translate-y-1/2 bg-zinc-800  rounded-lg  px-8 py-4 overflow-auto ${
 					className ? className : ""
 				}`}
 			>

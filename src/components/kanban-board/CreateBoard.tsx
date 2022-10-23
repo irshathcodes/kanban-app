@@ -1,30 +1,19 @@
 import { useState, useRef, useEffect, FormEvent } from "react";
 import { CheckIcon, PlusIcon } from "@heroicons/react/20/solid";
-import Loader from "../ui/Loader";
-import createTask from "../../api/createTask";
-import { CreateTask } from "../../models/Todos";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useMutateTask from "../hooks/useMutateTask";
+import createBoard from "../../api/createBoard";
 
 export default function CreateBoard() {
 	const [showInput, setShowInput] = useState(false);
 	const inputRef = useRef<HTMLInputElement | null>(null);
-	const { mutate, isLoading } = useMutation(createTask, {
-		onSuccess: () => {
-			queryClient.invalidateQueries(["fetch-all-todos"]);
-			setShowInput(false);
-		},
-	});
-	const queryClient = useQueryClient();
+	const { mutate, isLoading } = useMutateTask(createBoard);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
-		const task = {} as CreateTask;
 
 		if (inputRef.current) {
-			task.kanbanBoard = inputRef.current.value;
+			mutate({ board: inputRef.current.value });
 		}
-
-		mutate(task);
 	};
 
 	useEffect(() => {
