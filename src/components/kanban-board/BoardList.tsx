@@ -9,26 +9,31 @@ interface Props {
 	boardIndex: number;
 	changeBoard: (index: number) => void;
 	boards: string[] | undefined;
+	changeParams: (board: string) => void;
 }
 
 export default function BoardList({
 	board,
 	i,
 	boardIndex,
+	changeParams,
 	changeBoard,
 	boards,
 }: Props) {
 	const [hover, setHover] = useState(false);
 
+	const [searchParams, setSearchParams] = useSearchParams();
+	const boardFromParams = searchParams.get("board");
+
 	return (
 		<li
-			className={`cursor-pointer mb-3 pl-6 py-2 rounded-r-full  text-slate-400 text-base ${
-				boards?.[boardIndex] === board && " bg-primary-500 "
+			className={`cursor-pointer mb- p-6 py-2 rounded-r-full  text-slate-400 text-base ${
+				boardFromParams === board && " bg-primary-500 "
 			}`}
 			onMouseEnter={() => setHover(true)}
 			onMouseLeave={() => setHover(false)}
 			onClick={() => {
-				changeBoard(i);
+				changeParams(board);
 			}}
 		>
 			<a

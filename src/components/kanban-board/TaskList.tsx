@@ -4,18 +4,31 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import getAllTasks from "../../api/getAllTasks";
 import getBoards from "../../api/getBoards";
 import { v4 as getId } from "uuid";
-import { Outlet, useSearchParams, useNavigate } from "react-router-dom";
+import {
+	Outlet,
+	useSearchParams,
+	useNavigate,
+	useFetcher,
+} from "react-router-dom";
 import { getAllStatus } from "../../helpers/todo-data";
 import Todos from "../../models/Todos";
 
 export default function TaskList() {
 	const [boardIndex, setBoardIndex] = useState(0);
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams, setSearchParams] = useSearchParams({ board: "" });
 
-	const { data: boards } = useQuery(["fetch-boards"], getBoards);
-	const { data: tasks, isLoading } = useQuery(
-		["fetch-tasks", boards?.[boardIndex]],
-		() => getAllTasks(boards?.[boardIndex]),
+	const boardFromParams = searchParams.get("board")!;
+
+	const { data: boards } = useQuery(["fetch-boards"], getBoards, {});
+
+	const {
+		data: tasks,
+		isLoading,
+		isFetching,
+		isInitialLoading,
+	} = useQuery(
+		["fetch-tasks", boardFromParams || boards?.[0]],
+		() => getAllTasks(boardFromParams || boards?.[0]),
 		{
 			enabled: !!boards,
 		}
@@ -39,11 +52,10 @@ export default function TaskList() {
 	};
 
 	useEffect(() => {
-		console.log("search params useEffect is running");
 		if (boards) {
-			setSearchParams({ board: boards[boardIndex] });
+			setSearchParams({ board: searchParams.get("board")! });
 		}
-	}, [boardIndex]);
+	}, [searchParams.get("board")]);
 
 	return (
 		<>

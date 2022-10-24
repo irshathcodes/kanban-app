@@ -10,7 +10,12 @@ interface Props {
 	changeParams: (board: string) => void;
 }
 
-export default function Sidebar({ boards, boardIndex, changeBoard }: Props) {
+export default function Sidebar({
+	boards,
+	boardIndex,
+	changeBoard,
+	changeParams,
+}: Props) {
 	return (
 		<aside className="pr-2 sticky overflow-y-auto top-0	overflow-x-hidden bg-zinc-800 h-screen border border-zinc-800 border-r-gray-500">
 			<div className="h-14 pl-6 flex gap-2 items-center">
@@ -32,6 +37,7 @@ export default function Sidebar({ boards, boardIndex, changeBoard }: Props) {
 							boardIndex={boardIndex}
 							changeBoard={changeBoard}
 							key={getId()}
+							changeParams={changeParams}
 						/>
 					);
 				})}
