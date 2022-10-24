@@ -4,12 +4,13 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import getAllTasks from "../../api/getAllTasks";
 import getBoards from "../../api/getBoards";
 import { v4 as getId } from "uuid";
-import { Outlet, useAsyncError, useNavigate } from "react-router-dom";
+import { Outlet, useSearchParams, useNavigate } from "react-router-dom";
 import { getAllStatus } from "../../helpers/todo-data";
 import Todos from "../../models/Todos";
 
 export default function TaskList() {
 	const [boardIndex, setBoardIndex] = useState(0);
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	const { data: boards } = useQuery(["fetch-boards"], getBoards);
 	const { data: tasks, isLoading } = useQuery(
@@ -27,11 +28,22 @@ export default function TaskList() {
 		setBoardIndex(index);
 	};
 
+	const changeParams = (board: string) => {
+		setSearchParams({ board });
+	};
+
 	const handleCardClick = (id: string) => {
 		const task = tasks?.filter((task) => task._id === id)[0];
 
 		navigate("/update-task", { state: { task, allStatus } });
 	};
+
+	useEffect(() => {
+		console.log("search params useEffect is running");
+		if (boards) {
+			setSearchParams({ board: boards[boardIndex] });
+		}
+	}, [boardIndex]);
 
 	return (
 		<>
@@ -46,6 +58,7 @@ export default function TaskList() {
 					boards={boards}
 					boardIndex={boardIndex}
 					changeBoard={changeBoard}
+					changeParams={changeParams}
 				/>
 				<div>
 					<Navbar heading={boards && boards[boardIndex]} />

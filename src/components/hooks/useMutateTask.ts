@@ -20,7 +20,7 @@ export default function useMutateTask<T>(
 	return useMutation(mutateFunc, {
 		onSuccess: () => {
 			queryClient.invalidateQueries(invalidateQueries);
-			navigate("/");
+			navigate(-1);
 		},
 	});
 }
