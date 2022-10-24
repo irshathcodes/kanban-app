@@ -1,10 +1,12 @@
 import request from "../helpers/axios-instance";
 import Todos, { GetAllTodoResponse } from "../models/Todos";
 
-export default async function getAllTasks() {
-	const { data } = await request.get<GetAllTodoResponse>("/todo");
+export default async function getAllTasks(board: string | undefined) {
+	const { data } = await request.get<GetAllTodoResponse>(
+		`/todo?board=${board}`
+	);
 
-	const allTodos: Todos[] = data.todo;
+	const tasks: Todos[] = data.todo;
 
-	return allTodos;
+	return tasks;
 }

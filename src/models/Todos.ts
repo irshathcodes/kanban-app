@@ -42,7 +42,7 @@ export interface CreateBoard {
 	board: string;
 }
 
-export interface GetAllBoards {
+export interface GetBoards {
 	boards: Board[];
 }
 

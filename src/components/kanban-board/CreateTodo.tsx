@@ -10,7 +10,14 @@ import useMutateTask from "../hooks/useMutateTask";
 export default function CreateTodo() {
 	const navigate = useNavigate();
 
-	const { mutate, isLoading, isError } = useMutateTask(createTask);
+	const { board, status } = useOutletContext<{
+		board: string;
+		status: string[];
+	}>();
+
+	const { mutate, isLoading, isError } = useMutateTask(createTask, {
+		invalidateQueries: ["fetch-tasks", board],
+	});
 
 	const [subTasks, setsubTasks] = useState<CreateSubTask[]>([
 		{ subTask: "" },
@@ -24,17 +31,11 @@ export default function CreateTodo() {
 		kanbanBoard: "",
 	});
 
-	const { board, status } = useOutletContext<{
-		board: string;
-		status: string[];
-	}>();
-
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 
 		const createTask = {} as CreateTask;
-		if (!board) createTask.kanbanBoard = "my tasks";
-		else createTask.kanbanBoard = board;
+		createTask.kanbanBoard = board;
 
 		createTask.todoName = data.todoName.trim();
 

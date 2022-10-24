@@ -20,18 +20,24 @@ export default function UpdateTask() {
 		description,
 		status: currentStatus,
 		subTasks: subTasksList,
+		kanbanBoard: board,
 	} = task;
 
 	const [subTasks, setSubTasks] = useState(subTasksList);
 	const [status, setStatus] = useState(currentStatus);
 	const [error, setError] = useState("");
 
-	const { mutate, isLoading, isError } = useMutateTask(updateTask);
+	const invalidateQueries = { invalidateQueries: ["fetch-tasks", board] };
+
+	const { mutate, isLoading, isError } = useMutateTask(
+		updateTask,
+		invalidateQueries
+	);
 	const {
 		mutate: deleteMutate,
 		isLoading: isDeleting,
 		isError: isDeleteError,
-	} = useMutateTask(deleteTask);
+	} = useMutateTask(deleteTask, invalidateQueries);
 
 	if (isError) {
 		setError("something went wrong, please try again later");

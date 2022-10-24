@@ -6,13 +6,18 @@ import createBoard from "../../api/createBoard";
 export default function CreateBoard() {
 	const [showInput, setShowInput] = useState(false);
 	const inputRef = useRef<HTMLInputElement | null>(null);
-	const { mutate, isLoading } = useMutateTask(createBoard);
+	const { mutate, isLoading, isSuccess } = useMutateTask(createBoard, {
+		invalidateQueries: ["fetch-boards"],
+	});
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 
 		if (inputRef.current) {
 			mutate({ board: inputRef.current.value });
+		}
+		if (isSuccess) {
+			setShowInput(false);
 		}
 	};
 
