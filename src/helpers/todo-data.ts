@@ -13,10 +13,3 @@ export const getAllStatus = (tasks: Todos[] | undefined) => {
 
 	return status;
 };
-
-export const getBoards = (tasks: Todos[] | undefined) => {
-	const boards = tasks?.map((item) => item.kanbanBoard);
-
-	const uniqueBoards = [...new Set(boards)];
-	return uniqueBoards;
-};

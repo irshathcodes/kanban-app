@@ -1,14 +1,15 @@
 import { useState, useRef, useEffect, FormEvent } from "react";
 import { CheckIcon, PlusIcon } from "@heroicons/react/20/solid";
-import useMutateTask from "../hooks/useMutateTask";
 import createBoard from "../../api/createBoard";
-import { useMutation } from "@tanstack/react-query";
 import useMutateBoard from "../hooks/useMutateBoard";
+import useNotify from "../hooks/useNotify";
+import Notification from "../ui/Notification";
 
 export default function CreateBoard() {
 	const [showInput, setShowInput] = useState(false);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 	const { mutate, isLoading } = useMutateBoard(createBoard);
+	const { notify, showNotify } = useNotify();
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
@@ -19,6 +20,7 @@ export default function CreateBoard() {
 				{
 					onSuccess: () => {
 						setShowInput(false);
+						showNotify();
 					},
 				}
 			);
@@ -30,6 +32,7 @@ export default function CreateBoard() {
 			inputRef.current?.focus();
 		}
 	}, [showInput]);
+
 	return (
 		<>
 			{showInput && (
@@ -53,6 +56,10 @@ export default function CreateBoard() {
 					</button>
 				</form>
 			)}
+
+			<Notification notify={notify} color="success">
+				Board created successfully
+			</Notification>
 
 			<button
 				type="button"

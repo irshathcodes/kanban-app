@@ -1,6 +1,5 @@
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { Link, useParams } from "react-router-dom";
-import useGetBoardFromParams from "../hooks/useGetBoardFromParams";
 
 export default function Navbar() {
 	const { board } = useParams();

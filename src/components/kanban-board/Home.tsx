@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../ui/Navbar";
+import { Navbar } from "../ui/Index";
 import Boards from "./Boards";
 
 export default function Home() {
