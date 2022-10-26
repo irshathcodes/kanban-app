@@ -3,7 +3,7 @@ import { CheckIcon, PlusIcon } from "@heroicons/react/20/solid";
 import createBoard from "../../api/createBoard";
 import useMutateBoard from "../hooks/useMutateBoard";
 import useNotify from "../hooks/useNotify";
-import Notification from "../ui/Notification";
+import { Loader, Notification } from "../ui/Index";
 
 export default function CreateBoard() {
 	const [showInput, setShowInput] = useState(false);
@@ -58,7 +58,7 @@ export default function CreateBoard() {
 			)}
 
 			<Notification notify={notify} color="success">
-				Board created successfully
+				board created successfully
 			</Notification>
 
 			<button

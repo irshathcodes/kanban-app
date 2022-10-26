@@ -34,9 +34,10 @@ export default function SubTaskInput({ subTasks, setsubTasks }: Props) {
 							value={input.subTask}
 							onChange={(e) => handleChange(e, i)}
 						/>
-						<button onClick={() => handleRemove(i)}>
-							<XMarkIcon className="w-5 h-5 text-slate-400" />
-						</button>
+						<XMarkIcon
+							onClick={() => handleRemove(i)}
+							className="w-5 h-5 text-slate-400"
+						/>
 					</div>
 				);
 			})}

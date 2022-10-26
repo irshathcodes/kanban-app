@@ -1,8 +1,11 @@
 import { RectangleGroupIcon } from "@heroicons/react/20/solid";
 import { TrashIcon } from "@heroicons/react/20/solid";
-import { useEffect, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import Modal from "../ui/Modal";
+import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import deleteBoard from "../../api/deleteBoard";
+import useMutateBoard from "../hooks/useMutateBoard";
+import useNotify from "../hooks/useNotify";
+import { Notification, Loader } from "../ui/Index";
 
 interface Props {
 	board: string;
@@ -11,9 +14,15 @@ interface Props {
 export default function BoardList({ board }: Props) {
 	const [hover, setHover] = useState(false);
 	const { board: boardFromParams } = useParams();
+	const { mutate, isLoading } = useMutateBoard(deleteBoard);
+	const { notify, showNotify } = useNotify();
 
-	const handleDelete = () => {
-		alert("Hello");
+	const handleDelete = (board: string) => {
+		mutate(board, {
+			onSuccess: () => {
+				showNotify();
+			},
+		});
 	};
 
 	return (
@@ -41,12 +50,17 @@ export default function BoardList({ board }: Props) {
 								? "translate-x-0 opacity-100 text-slate-100"
 								: "translate-x-[100%]"
 						}`}
-						onClick={handleDelete}
+						disabled={isLoading}
+						style={{ cursor: isLoading ? "not-allowed" : "pointer" }}
+						onClick={() => handleDelete(board)}
 					>
-						<TrashIcon className="w-5 h-5" />
+						{isLoading ? <Loader /> : <TrashIcon className="w-5 h-5" />}
 					</button>
 				</div>
 			</li>
+			<Notification notify={notify} color="danger">
+				{board} board deleted successfully
+			</Notification>
 		</Link>
 	);
 }

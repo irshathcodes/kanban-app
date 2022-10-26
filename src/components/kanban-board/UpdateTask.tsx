@@ -116,7 +116,7 @@ export default function UpdateTask() {
 				/>
 
 				<div>
-					<Button type="submit" loader={isLoading}>
+					<Button type="submit" loader={isLoading} className="mb-2">
 						Update Task
 					</Button>
 

@@ -10,7 +10,7 @@ export default function useNotify() {
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			setNotify(false);
-		}, 3000);
+		}, 4000);
 
 		return () => {
 			clearTimeout(timeout);

@@ -7,12 +7,13 @@ import createTask from "../../api/createTask";
 import SubTaskInput from "./SubTaskInput";
 import useMutateTask from "../hooks/useMutateTask";
 import { useParams } from "react-router-dom";
+import useNotify from "../hooks/useNotify";
 
 export default function CreateTask() {
 	const navigate = useNavigate();
+	const { notify, showNotify } = useNotify();
 
 	const { board } = useParams();
-
 	const { status } = useOutletContext<{
 		status: string[];
 	}>();
@@ -23,13 +24,14 @@ export default function CreateTask() {
 		{ subTask: "" },
 		{ subTask: "" },
 	]);
-	const titleRef = useRef<HTMLInputElement>(null);
 
 	const [data, setData] = useState<CreateTaskReq>({
 		todoName: "",
 		description: "",
 		kanbanBoard: "",
 	});
+	const [error, setError] = useState("");
+	const titleRef = useRef<HTMLInputElement>(null);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
@@ -45,7 +47,15 @@ export default function CreateTask() {
 			(item) => item.subTask.trim().length > 0
 		);
 
-		if (enteredSubTasks.length > 0) createTask.subTasks = enteredSubTasks;
+		console.log(enteredSubTasks);
+
+		if (enteredSubTasks.length === 0) {
+			setError("please enter atleast one subtask to create a task");
+			showNotify();
+			return;
+		}
+
+		createTask.subTasks = enteredSubTasks;
 		if (data.description?.trim())
 			createTask.description = data.description.trim();
 
@@ -60,9 +70,7 @@ export default function CreateTask() {
 			<form onSubmit={handleSubmit} className="text-slate-200">
 				<div className="flex items-center justify-between">
 					<h2 className="text-lg font-semibold capitalize">add new task</h2>
-					<button onClick={() => navigate(-1)}>
-						<XMarkIcon className="w-7 h-7" />
-					</button>
+					<XMarkIcon className="w-7 h-7" onClick={() => navigate(-1)} />
 				</div>
 
 				<Label name="title" />
@@ -95,6 +103,8 @@ export default function CreateTask() {
 
 				<Label name="status" />
 				<Select values={status} disabled={true} styles="cursor-not-allowed" />
+				{notify && <p className="mt-4 text-red-600 text-bold">{error}</p>}
+
 				<Button type="submit" loader={isLoading} className="rounded-full py-2">
 					{isLoading
 						? "Creating..."
