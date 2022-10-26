@@ -2,22 +2,26 @@ import { useState, useRef, useEffect, FormEvent } from "react";
 import { CheckIcon, PlusIcon } from "@heroicons/react/20/solid";
 import useMutateTask from "../hooks/useMutateTask";
 import createBoard from "../../api/createBoard";
+import { useMutation } from "@tanstack/react-query";
+import useMutateBoard from "../hooks/useMutateBoard";
 
 export default function CreateBoard() {
 	const [showInput, setShowInput] = useState(false);
 	const inputRef = useRef<HTMLInputElement | null>(null);
-	const { mutate, isLoading, isSuccess } = useMutateTask(createBoard, {
-		invalidateQueries: ["fetch-boards"],
-	});
+	const { mutate, isLoading } = useMutateBoard(createBoard);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 
 		if (inputRef.current) {
-			mutate({ board: inputRef.current.value });
-		}
-		if (isSuccess) {
-			setShowInput(false);
+			mutate(
+				{ board: inputRef.current.value },
+				{
+					onSuccess: () => {
+						setShowInput(false);
+					},
+				}
+			);
 		}
 	};
 

@@ -27,17 +27,12 @@ export default function UpdateTask() {
 	const [status, setStatus] = useState(currentStatus);
 	const [error, setError] = useState("");
 
-	const invalidateQueries = { invalidateQueries: ["fetch-tasks", board] };
-
-	const { mutate, isLoading, isError } = useMutateTask(
-		updateTask,
-		invalidateQueries
-	);
+	const { mutate, isLoading, isError } = useMutateTask(updateTask);
 	const {
 		mutate: deleteMutate,
 		isLoading: isDeleting,
 		isError: isDeleteError,
-	} = useMutateTask(deleteTask, invalidateQueries);
+	} = useMutateTask(deleteTask);
 
 	if (isError) {
 		setError("something went wrong, please try again later");
@@ -79,7 +74,7 @@ export default function UpdateTask() {
 	}, [error]);
 
 	return (
-		<Modal className="py-8 text-slate-200">
+		<Modal className="py-8 px-8 text-slate-200">
 			<form onSubmit={handleSubmit}>
 				<h1 className="text-2xl font-semibold first-letter:uppercase mb-4">
 					{taskName}

@@ -2,22 +2,22 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Input, Label, Button, Select, Modal } from "../ui/Index";
-import { CreateTask, CreateSubTask } from "../../models/Todos";
+import { CreateTaskReq, CreateSubTask } from "../../models/Todos";
 import createTask from "../../api/createTask";
 import SubTaskInput from "./SubTaskInput";
 import useMutateTask from "../hooks/useMutateTask";
+import { useParams } from "react-router-dom";
 
-export default function CreateTodo() {
+export default function CreateTask() {
 	const navigate = useNavigate();
 
-	const { board, status } = useOutletContext<{
-		board: string;
+	const { board } = useParams();
+
+	const { status } = useOutletContext<{
 		status: string[];
 	}>();
 
-	const { mutate, isLoading, isError } = useMutateTask(createTask, {
-		invalidateQueries: ["fetch-tasks", board],
-	});
+	const { mutate, isLoading, isError } = useMutateTask(createTask);
 
 	const [subTasks, setsubTasks] = useState<CreateSubTask[]>([
 		{ subTask: "" },
@@ -25,7 +25,7 @@ export default function CreateTodo() {
 	]);
 	const titleRef = useRef<HTMLInputElement>(null);
 
-	const [data, setData] = useState<CreateTask>({
+	const [data, setData] = useState<CreateTaskReq>({
 		todoName: "",
 		description: "",
 		kanbanBoard: "",
@@ -34,8 +34,10 @@ export default function CreateTodo() {
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 
-		const createTask = {} as CreateTask;
-		createTask.kanbanBoard = board;
+		const createTask = {} as CreateTaskReq;
+		if (board) {
+			createTask.kanbanBoard = board;
+		}
 
 		createTask.todoName = data.todoName.trim();
 

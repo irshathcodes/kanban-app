@@ -1,31 +1,42 @@
 import { useState, useEffect } from "react";
 import request from "../../helpers/axios-instance";
 import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Button from "../ui/Button";
+import axios, { AxiosError } from "axios";
+import getBoards from "../../api/getBoards";
+import login from "../../api/auth/login";
+import useMutateBoard from "../hooks/useMutateBoard";
+import createBoard from "../../api/createBoard";
 
 export default function Login() {
+	const { mutate: mutateLogin, data: res, isLoading } = useMutation(login);
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
 
 	const navigate = useNavigate();
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		setLoading(true);
-		request
-			.post("/auth/login", { email, password })
-			.then((res) => {
-				const username = res.data;
-				setLoading(false);
-				navigate("/", { state: username, replace: true });
-			})
-			.catch((err) => {
-				setLoading(false);
-				if (err?.response.status === 401) setError(err.response.data.msg);
-				else setError("Something went wrong, Try again later");
-			});
+		mutateLogin(
+			{ email, password },
+			{
+				onSuccess: () => {
+					navigate("/", { state: res?.data.username, replace: true });
+				},
+				onError: (err) => {
+					if (axios.isAxiosError(err)) {
+						if (err.response?.data) {
+							setError(err.response.data.msg);
+						}
+					} else {
+						setError("Something went wrong, please try again later");
+					}
+				},
+			}
+		);
 	};
 
 	useEffect(() => {
@@ -81,8 +92,8 @@ export default function Login() {
 							/>
 						</div>
 
-						<Button type="submit" loader={loading}>
-							{loading ? "Signing in..." : "Sign in"}
+						<Button type="submit" loader={isLoading}>
+							{isLoading ? "Signing in..." : "Sign in"}
 						</Button>
 					</form>
 

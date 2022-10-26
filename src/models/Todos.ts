@@ -11,7 +11,7 @@ export default interface Todos {
 	userId: string;
 	__v: 0;
 }
-export type CreateTask = {
+export type CreateTaskReq = {
 	todoName: string;
 	kanbanBoard: string;
 	description?: string;
