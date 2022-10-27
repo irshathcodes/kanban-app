@@ -1,16 +1,14 @@
-import { useState, useEffect } from "react";
-import request from "../../helpers/axios-instance";
-import { useNavigate } from "react-router-dom";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 import Button from "../ui/Button";
-import axios, { AxiosError } from "axios";
-import getBoards from "../../api/getBoards";
+import axios from "axios";
 import login from "../../api/auth/login";
-import useMutateBoard from "../hooks/useMutateBoard";
-import createBoard from "../../api/createBoard";
+import useNotify from "../hooks/useNotify";
 
 export default function Login() {
 	const { mutate: mutateLogin, data: res, isLoading } = useMutation(login);
+	const { notify, showNotify } = useNotify();
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -27,6 +25,7 @@ export default function Login() {
 					navigate("/", { state: res?.data.username, replace: true });
 				},
 				onError: (err) => {
+					showNotify();
 					if (axios.isAxiosError(err)) {
 						if (err.response?.data) {
 							setError(err.response.data.msg);
@@ -39,15 +38,6 @@ export default function Login() {
 		);
 	};
 
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setError("");
-		}, 3000);
-
-		return () => {
-			clearTimeout(timeout);
-		};
-	}, [error]);
 	return (
 		<>
 			<div className="flex h-screen flex-col items-center bg-gray-50 pt-20 ">
@@ -55,32 +45,31 @@ export default function Login() {
 					<h1 className="py-2 text-center text-2xl font-bold ">
 						Sign in to your account
 					</h1>
+
+					<p className="text-center  text-sm w-full font-medium">
+						or don't have an account?{" "}
+						<Link to="/register" className="text-primary-600 underline">
+							sign up for free
+						</Link>
+					</p>
+
 					<form onSubmit={handleSubmit}>
-						<div className="my-6 flex flex-col gap-1">
-							<label
-								htmlFor="email"
-								className="text-[15px] font-semibold text-slate-600"
-							>
-								email
-							</label>
+						<label htmlFor="email" className="label-styles">
+							email
 							<input
 								type="email"
 								name="email"
 								required
-								className="rounded border-2 border-slate-300 px-2 py-[3px] focus:outline-primary-500"
 								value={email}
+								className="input-styles"
 								onChange={(e) => setEmail(e.target.value)}
 								id="email"
 								placeholder="example@gmail.com"
 							/>
-						</div>
-						<div className="my-4 flex flex-col gap-1">
-							<label
-								htmlFor="password"
-								className="text-[15px] font-semibold text-slate-600"
-							>
-								password
-							</label>
+						</label>
+
+						<label htmlFor="password" className="label-styles">
+							password
 							<input
 								type="password"
 								name="password"
@@ -88,16 +77,20 @@ export default function Login() {
 								required
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
-								className="rounded border-2 border-slate-300  px-2 py-[3px] focus:outline-primary-500"
+								className="input-styles"
 							/>
-						</div>
+						</label>
 
-						<Button type="submit" loader={isLoading}>
+						<button className="text-sm text-primary-600 font-medium">
+							Forgot your password?
+						</button>
+
+						<Button type="submit" className="mt-5" loader={isLoading}>
 							{isLoading ? "Signing in..." : "Sign in"}
 						</Button>
 					</form>
 
-					{error && <p className="text-center text-red-600">{error}</p>}
+					{notify && <p className="text-center text-red-600">{error}</p>}
 				</div>
 			</div>
 		</>
