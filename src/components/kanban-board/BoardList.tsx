@@ -1,7 +1,7 @@
 import { RectangleGroupIcon } from "@heroicons/react/20/solid";
 import { TrashIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import deleteBoard from "../../api/deleteBoard";
 import useMutateBoard from "../hooks/useMutateBoard";
 import { Loader } from "../ui/Index";
@@ -15,6 +15,7 @@ export default function BoardList({ board, boards }: Props) {
 	const [hover, setHover] = useState(false);
 	const { mutate, isLoading } = useMutateBoard(deleteBoard);
 	const navigate = useNavigate();
+	const { board: boardFromParams } = useParams();
 
 	const handleDelete = (board: string) => {
 		mutate(board, {
@@ -34,14 +35,16 @@ export default function BoardList({ board, boards }: Props) {
 			{({ isActive }) => (
 				<li
 					className={`cursor-pointer mb-3 px-4 py-2 transition-all  rounded-r-full text-base ${
-						isActive && " bg-primary-500"
+						(isActive || boardFromParams === board) && " bg-primary-500"
 					}`}
 					onMouseEnter={() => setHover(true)}
 					onMouseLeave={() => setHover(false)}
 				>
 					<div
 						className={`flex justify-between items-center ${
-							isActive ? "text-slate-100" : "text-slate-400"
+							isActive || boardFromParams === board
+								? "text-slate-100"
+								: "text-slate-400"
 						}`}
 					>
 						<div className="flex items-center gap-2">
