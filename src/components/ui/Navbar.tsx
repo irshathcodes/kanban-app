@@ -16,13 +16,15 @@ export default function Navbar() {
 					</button>
 				</Link>
 				<div>
-					<Link
-						to={`/${board}/create-task`}
-						className="bg-primary-500 px-4 py-1 rounded-full text-slate-300 font-semibold flex items-center"
-					>
-						<PlusIcon className="h-5 w-5" />
-						<span>Add new task</span>
-					</Link>
+					{board && (
+						<Link
+							to={`/${board}/create-task`}
+							className="flex items-center bg-primary-500 px-4 py-1 rounded-full text-slate-300 font-semibold"
+						>
+							<PlusIcon className="h-5 w-5" />
+							<span>Add new task</span>
+						</Link>
+					)}
 				</div>
 			</div>
 		</nav>

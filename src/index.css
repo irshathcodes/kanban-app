@@ -14,6 +14,14 @@
 	}
 }
 
+@layer base {
+	input[type="number"]::-webkit-inner-spin-button,
+	input[type="number"]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+}
+
 @layer components {
 	.circle {
 		display: inline-block;
@@ -26,7 +34,7 @@
 	}
 
 	.input-styles {
-		@apply rounded border-2 font-medium border-slate-300 px-2 py-[3px] focus:outline-primary-500;
+		@apply rounded border font-medium text-slate-700 border-slate-300 px-2 py-[3px];
 	}
 
 	.label-styles {
@@ -44,10 +52,16 @@
 	background-color: rgb(34, 197, 94);
 }
 
-.modal {
+/* .modal {
 	width: 200px;
 	height: 500px;
 	position: absolute;
 	top: 0;
 	left: 0;
+} */
+
+.active {
+	background-color: red;
+	color: blue;
+	padding: 10px;
 }

@@ -3,11 +3,11 @@ import { CheckIcon, PlusIcon } from "@heroicons/react/20/solid";
 import createBoard from "../../api/createBoard";
 import useMutateBoard from "../hooks/useMutateBoard";
 import useNotify from "../hooks/useNotify";
-import { Loader, Notification } from "../ui/Index";
+import { Notification } from "../ui/Index";
 
 export default function CreateBoard() {
 	const [showInput, setShowInput] = useState(false);
-	const inputRef = useRef<HTMLInputElement | null>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 	const { mutate, isLoading } = useMutateBoard(createBoard);
 	const { notify, showNotify } = useNotify();
 

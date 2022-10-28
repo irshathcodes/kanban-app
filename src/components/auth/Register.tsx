@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import Button from "../ui/Button";
+import { Button } from "../ui/Index";
 import axios from "axios";
 import useNotify from "../hooks/useNotify";
 import register from "../../api/auth/register";
@@ -23,7 +23,7 @@ export default function Register() {
 			{ name, email, password },
 			{
 				onSuccess: () => {
-					navigate("/", { state: res?.data.username, replace: true });
+					navigate("/verify-user");
 				},
 				onError: (err) => {
 					if (axios.isAxiosError(err)) {
@@ -61,7 +61,7 @@ export default function Register() {
 								name="name"
 								required
 								value={name}
-								className="input-styles"
+								className="input-styles capitalize"
 								onChange={(e) => setName(e.target.value)}
 								id="name"
 							/>
@@ -95,10 +95,9 @@ export default function Register() {
 						</label>
 
 						<Button type="submit" loader={isLoading}>
-							{isLoading ? "Signing in..." : "Sign in"}
+							{isLoading ? "Registering..." : "Sign up"}
 						</Button>
 					</form>
-
 					{notify && <p className="text-center text-red-600">{error}</p>}
 				</div>
 			</div>

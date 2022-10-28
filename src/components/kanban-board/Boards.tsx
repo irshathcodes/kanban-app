@@ -19,7 +19,7 @@ export default function Boards() {
 				</p>
 				<ul className="capitalize font-medium">
 					{boards?.map((board) => {
-						return <BoardList board={board} key={getId()} />;
+						return <BoardList board={board} boards={boards} key={getId()} />;
 					})}
 				</ul>
 
