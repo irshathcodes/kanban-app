@@ -4,12 +4,17 @@ import createBoard from "../../api/createBoard";
 import useMutateBoard from "../hooks/useMutateBoard";
 import useNotify from "../hooks/useNotify";
 import { Notification } from "../ui/Index";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function CreateBoard() {
 	const [showInput, setShowInput] = useState(false);
+	const [error, setError] = useState("");
 	const inputRef = useRef<HTMLInputElement>(null);
 	const { mutate, isLoading } = useMutateBoard(createBoard);
 	const { notify, showNotify } = useNotify();
+
+	const navigate = useNavigate();
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
@@ -18,9 +23,19 @@ export default function CreateBoard() {
 			mutate(
 				{ board: inputRef.current.value },
 				{
-					onSuccess: () => {
+					onSuccess: (res) => {
 						setShowInput(false);
+						setError("");
 						showNotify();
+						navigate(`/${res.data.kanbanBoard.board}`);
+					},
+					onError: (err) => {
+						if (axios.isAxiosError(err)) {
+							if (err.response?.data) {
+								setError(err.response.data.msg);
+								showNotify();
+							}
+						}
 					},
 				}
 			);
@@ -57,8 +72,12 @@ export default function CreateBoard() {
 				</form>
 			)}
 
-			<Notification notify={notify} color="success">
-				board created successfully
+			<Notification
+				notify={notify}
+				showIcon={error ? false : true}
+				color={error ? "danger" : "success"}
+			>
+				{error ? error : "board created successfully"}
 			</Notification>
 
 			<button

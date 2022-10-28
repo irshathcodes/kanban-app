@@ -6,7 +6,7 @@ export default function Navbar() {
 
 	return (
 		<nav className="flex sticky top-0 z-10 justify-between items-center gap-2 px-4 py-3 dark:bg-zinc-800">
-			<h1 className="text-slate-100 font-semibold text-lg capitalize">
+			<h1 className="text-slate-100 font-semibold text-lg capitalize ">
 				{board}
 			</h1>
 			<div className="flex gap-6 items-center">

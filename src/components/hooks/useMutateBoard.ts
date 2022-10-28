@@ -4,8 +4,8 @@ import {
 	useQueryClient,
 } from "@tanstack/react-query";
 
-export default function useMutateBoard<T>(
-	mutateFunc: MutationFunction<unknown, T>
+export default function useMutateBoard<R, T>(
+	mutateFunc: MutationFunction<R, T>
 ) {
 	const queryClient = useQueryClient();
 

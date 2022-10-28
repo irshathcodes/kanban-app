@@ -44,7 +44,7 @@ export default function Login() {
 
 	return (
 		<div className="flex h-screen flex-col items-center bg-gray-50 pt-20 ">
-			<div className="w-96 rounded-md border border-gray-200 px-6 py-6 ">
+			<div className="w-96 rounded-md border border-gray-200 p-6 ">
 				<h1 className="py-2 text-center text-2xl font-bold ">
 					Sign in to your account
 				</h1>
