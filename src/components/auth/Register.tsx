@@ -5,6 +5,7 @@ import { Button } from "../ui/Index";
 import axios from "axios";
 import useNotify from "../hooks/useNotify";
 import register from "../../api/auth/register";
+import GuestLogin from "./GuestLogin";
 
 export default function Register() {
 	const { mutate: mutateLogin, data: res, isLoading } = useMutation(register);
@@ -101,6 +102,7 @@ export default function Register() {
 					{notify && <p className="text-center text-red-600">{error}</p>}
 				</div>
 			</div>
+			<GuestLogin />
 		</>
 	);
 }

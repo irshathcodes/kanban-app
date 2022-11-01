@@ -5,6 +5,7 @@ import Button from "../ui/Button";
 import axios from "axios";
 import login from "../../api/auth/login";
 import useNotify from "../hooks/useNotify";
+import GuestLogin from "./GuestLogin";
 
 export default function Login() {
 	const queryClient = useQueryClient();
@@ -41,7 +42,6 @@ export default function Login() {
 			}
 		);
 	};
-
 	return (
 		<div className="flex h-screen flex-col items-center bg-gray-50 pt-20 ">
 			<div className="w-96 rounded-md border border-gray-200 p-6 ">
@@ -94,6 +94,8 @@ export default function Login() {
 				</form>
 
 				{notify && <p className="text-center text-red-600">{error}</p>}
+
+				<GuestLogin />
 			</div>
 		</div>
 	);

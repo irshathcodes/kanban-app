@@ -5,4 +5,16 @@ const instance = axios.create({
 	withCredentials: true,
 });
 
+instance.interceptors.response.use(
+	(res) => res,
+	(err) => {
+		if (axios.isAxiosError(err)) {
+			if (err.response?.status === 401) {
+				window.location.href = "/login";
+			}
+		}
+		return Promise.reject(err);
+	}
+);
+
 export default instance;
