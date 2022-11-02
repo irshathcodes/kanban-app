@@ -5,16 +5,11 @@ export default function Navbar() {
 	const { board } = useParams();
 
 	return (
-		<nav className="flex sticky top-0 z-10 justify-between items-center gap-2 px-4 py-3 dark:bg-zinc-800">
+		<nav className="flex min-h-[40px] sticky top-0 z-10 justify-between items-center gap-2 px-4 py-3 dark:bg-zinc-800">
 			<h1 className="text-slate-100 font-semibold text-lg capitalize ">
 				{board}
 			</h1>
 			<div className="flex gap-6 items-center">
-				<Link to="/login">
-					<button type="button" className="inline font-semibold text-slate-400">
-						Login
-					</button>
-				</Link>
 				<div>
 					{board && (
 						<Link

@@ -9,7 +9,7 @@ import GuestLogin from "./GuestLogin";
 
 export default function Login() {
 	const queryClient = useQueryClient();
-	const { mutate: mutateLogin, data: res, isLoading } = useMutation(login);
+	const { mutate: mutateLogin, isLoading } = useMutation(login);
 
 	const { notify, showNotify } = useNotify();
 
@@ -27,7 +27,7 @@ export default function Login() {
 				onSuccess: () => {
 					queryClient.invalidateQueries(["fetch-boards"]);
 
-					navigate("/", { state: res?.data.username, replace: true });
+					navigate("/");
 				},
 				onError: (err) => {
 					showNotify();
