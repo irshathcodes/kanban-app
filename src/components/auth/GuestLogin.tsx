@@ -4,7 +4,6 @@ import guestLogin from "../../api/auth/guestLogin";
 
 export default function GuestLogin() {
 	const navigate = useNavigate();
-	console.log(navigate);
 	const { mutate, isLoading } = useMutation(guestLogin, {
 		onSuccess: () => {
 			navigate("/");

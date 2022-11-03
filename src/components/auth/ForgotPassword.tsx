@@ -28,11 +28,9 @@ export default function ForgotPassword() {
 		mutate(
 			{ verificationOtp: +otp },
 			{
-				onSuccess: (res) => {
+				onSuccess: () => {
 					queryClient.invalidateQueries(["fetch-boards"]);
-					navigate("/", {
-						state: res.data.username,
-					});
+					navigate("/");
 				},
 			}
 		);
