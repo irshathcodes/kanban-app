@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect, FormEvent } from "react";
+import { useState, useRef, useEffect, FormEvent } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
-import useNotify from "../hooks/useNotify";
+import { useNotify, useFocus } from "../hooks/Index";
 import Button from "../ui/Button";
-import verifyUser from "../../api/auth/verifyUser";
 import Notification from "../ui/Notification";
 import changePassword from "../../api/auth/changePassword";
 
@@ -29,9 +28,7 @@ export default function ChangePassword() {
 		);
 	};
 
-	useEffect(() => {
-		inputRef.current?.focus();
-	}, []);
+	useFocus(inputRef);
 
 	return (
 		<div className="w-full flex pt-20 justify-center h-screen ">

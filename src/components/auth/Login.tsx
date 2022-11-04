@@ -93,7 +93,7 @@ export default function Login() {
 					</Button>
 				</form>
 
-				{notify && <p className="text-center text-red-600">{error}</p>}
+				{notify && <p className="text-center text-red-600 my-4">{error}</p>}
 
 				<GuestLogin />
 			</div>

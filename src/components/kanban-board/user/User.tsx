@@ -57,24 +57,31 @@ export default function User() {
 			<button onClick={() => mutate()}>
 				<ArrowRightOnRectangleIcon className="w-5 h-5 text-slate-300" />
 			</button>
-			<UserOptions showOptions={showOptions} ref={optionsRef} />
+			<UserOptions
+				showOptions={showOptions}
+				ref={optionsRef}
+				userType={data?.userType}
+			/>
 		</div>
 	);
 }
 
+interface UserOptionsProps {
+	showOptions: boolean;
+	userType: "guest" | "user" | undefined;
+}
+
 const UserOptions = forwardRef(
 	(
-		{
-			showOptions,
-		}: {
-			showOptions: boolean;
-		},
+		{ showOptions, userType }: UserOptionsProps,
 		ref: React.LegacyRef<HTMLDivElement>
 	) => {
 		const navigate = useNavigate();
+		const queryClient = useQueryClient();
 
 		const { mutate: mutateDelete, isLoading } = useMutation(deleteAccount, {
 			onSuccess: () => {
+				queryClient.invalidateQueries();
 				navigate("/register");
 			},
 		});
@@ -86,12 +93,15 @@ const UserOptions = forwardRef(
 					showOptions ? "-translate-y-[85%] " : "translate-y-16 "
 				} `}
 			>
-				<button
-					onClick={() => navigate("/change-password")}
-					className="block py-2 border rounded w-full border-neutral-900 hover:bg-primary-600  px-2 border-b-slate-700 capitalize transition-all"
-				>
-					change password
-				</button>
+				{userType === "user" && (
+					<button
+						onClick={() => navigate("/change-password")}
+						className="block py-2 border rounded w-full border-neutral-900 hover:bg-primary-600  px-2 border-b-slate-700 capitalize transition-all"
+					>
+						change password
+					</button>
+				)}
+
 				<button
 					onClick={() => mutateDelete()}
 					className="block py-2 hover:bg-red-600 rounded w-full px-2 capitalize transition-all"

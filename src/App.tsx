@@ -8,6 +8,7 @@ import UpdateTask from "./components/kanban-board/UpdateTask";
 import Home from "./components/kanban-board/Home";
 import VerifyUser from "./components/auth/VerifyUser";
 import ChangePassword from "./components/auth/ChangePassword";
+import ResetPassword from "./components/auth/ResetPassword";
 
 function App() {
 	return (
@@ -25,6 +26,7 @@ function App() {
 					<Route path="/verify-user" element={<VerifyUser />} />
 					<Route path="/change-password" element={<ChangePassword />} />
 
+					<Route path="/reset-password" element={<ResetPassword />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</div>
