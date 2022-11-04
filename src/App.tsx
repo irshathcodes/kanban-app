@@ -7,7 +7,7 @@ import CreateTask from "./components/kanban-board/CreateTask";
 import UpdateTask from "./components/kanban-board/UpdateTask";
 import Home from "./components/kanban-board/Home";
 import VerifyUser from "./components/auth/VerifyUser";
-import ForgotPassword from "./components/auth/ForgotPassword";
+import ChangePassword from "./components/auth/ChangePassword";
 
 function App() {
 	return (
@@ -23,7 +23,7 @@ function App() {
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/verify-user" element={<VerifyUser />} />
-					<Route path="/forgot-password" element={<ForgotPassword />} />
+					<Route path="/change-password" element={<ChangePassword />} />
 
 					<Route path="*" element={<NotFound />} />
 				</Routes>

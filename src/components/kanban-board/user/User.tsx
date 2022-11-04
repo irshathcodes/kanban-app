@@ -73,7 +73,7 @@ const UserOptions = forwardRef(
 	) => {
 		const navigate = useNavigate();
 
-		const { mutate, isLoading } = useMutation(deleteAccount, {
+		const { mutate: mutateDelete, isLoading } = useMutation(deleteAccount, {
 			onSuccess: () => {
 				navigate("/register");
 			},
@@ -82,16 +82,19 @@ const UserOptions = forwardRef(
 		return (
 			<div
 				ref={ref}
-				className={`absolute  transition-transform right-0 bg-neutral-900 p-2  rounded ${
-					showOptions ? "-translate-y-[85%] z-10" : "translate-y-6 -z-10"
+				className={`absolute w-full transition-transform right-0 ease-linear bg-neutral-900 p-2  rounded ${
+					showOptions ? "-translate-y-[85%] " : "translate-y-16 "
 				} `}
 			>
-				<button className="block py-2 border rounded w-full border-neutral-900 hover:bg-primary-600  px-2 border-b-slate-700">
-					reset password
+				<button
+					onClick={() => navigate("/change-password")}
+					className="block py-2 border rounded w-full border-neutral-900 hover:bg-primary-600  px-2 border-b-slate-700 capitalize transition-all"
+				>
+					change password
 				</button>
 				<button
-					onClick={() => mutate()}
-					className="block py-2 hover:bg-red-600 rounded w-full px-2 "
+					onClick={() => mutateDelete()}
+					className="block py-2 hover:bg-red-600 rounded w-full px-2 capitalize transition-all"
 				>
 					{isLoading ? "deleting..." : "delete account"}
 				</button>

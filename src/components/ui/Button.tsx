@@ -6,6 +6,7 @@ interface Props {
 	type?: "button" | "submit" | "reset" | undefined;
 	onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 	className?: string;
+	disabled?: boolean;
 }
 export default function Button({
 	children,
@@ -13,6 +14,7 @@ export default function Button({
 	loader,
 	onClick,
 	className,
+	disabled,
 }: Props) {
 	return (
 		<button
@@ -21,6 +23,7 @@ export default function Button({
 				className ? className : ""
 			}`}
 			onClick={onClick}
+			disabled={disabled}
 		>
 			{loader && <Loader />}
 			{children}
