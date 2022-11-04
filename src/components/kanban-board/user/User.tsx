@@ -15,10 +15,7 @@ export default function User() {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 
-	const { data } = useQuery(["get-user"], getUser, {
-		staleTime: Infinity,
-		cacheTime: Infinity,
-	});
+	const { data } = useQuery(["get-user"], getUser);
 	const { mutate, isLoading } = useMutation(logout, {
 		onSuccess: () => {
 			queryClient.removeQueries();
@@ -77,11 +74,9 @@ const UserOptions = forwardRef(
 		ref: React.LegacyRef<HTMLDivElement>
 	) => {
 		const navigate = useNavigate();
-		const queryClient = useQueryClient();
 
 		const { mutate: mutateDelete, isLoading } = useMutation(deleteAccount, {
 			onSuccess: () => {
-				queryClient.invalidateQueries();
 				navigate("/register");
 			},
 		});

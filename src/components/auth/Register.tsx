@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "../ui/Index";
 import axios from "axios";
 import useNotify from "../hooks/useNotify";
@@ -17,6 +17,7 @@ export default function Register() {
 	const [error, setError] = useState("");
 
 	const navigate = useNavigate();
+	const queryClient = useQueryClient();
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -24,6 +25,7 @@ export default function Register() {
 			{ name, email, password },
 			{
 				onSuccess: () => {
+					queryClient.invalidateQueries();
 					navigate("/verify-user");
 				},
 				onError: (err) => {
@@ -100,9 +102,9 @@ export default function Register() {
 						</Button>
 					</form>
 					{notify && <p className="text-center text-red-600">{error}</p>}
+					<GuestLogin />
 				</div>
 			</div>
-			<GuestLogin />
 		</>
 	);
 }

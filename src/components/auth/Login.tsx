@@ -25,7 +25,7 @@ export default function Login() {
 			{ email, password },
 			{
 				onSuccess: () => {
-					queryClient.invalidateQueries(["fetch-boards"]);
+					queryClient.invalidateQueries();
 
 					navigate("/");
 				},
@@ -84,7 +84,11 @@ export default function Login() {
 						/>
 					</label>
 
-					<button className="text-sm text-primary-600 font-medium">
+					<button
+						type="button"
+						onClick={() => navigate("/change-password")}
+						className="text-sm text-primary-600 font-medium hover:underline"
+					>
 						Forgot your password?
 					</button>
 
