@@ -1,32 +1,25 @@
+import React from "react";
 import Loader from "../ui/Loader";
 
 interface Props {
 	loader?: boolean;
 	children: React.ReactNode;
-	type?: "button" | "submit" | "reset" | undefined;
-	onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
-	className?: string;
-	disabled?: boolean;
+	type?: "button" | "submit" | "reset";
+	styles?: string;
 }
-export default function Button({
-	children,
-	type = "button",
-	loader,
-	onClick,
-	className,
-	disabled,
-}: Props) {
+export default function Button(
+	props: React.ButtonHTMLAttributes<HTMLButtonElement> & Props
+) {
 	return (
 		<button
-			type={type}
+			type={props.type ? props.type : "button"}
 			className={`my-8 w-full rounded bg-primary-600 py-2 mb-4 font-semibold text-slate-100 capitalize ring-primary-100 focus:outline-primary-100 focus:ring-2 flex items-center justify-center ${
-				className ? className : ""
+				props.styles ? props.styles : ""
 			}`}
-			onClick={onClick}
-			disabled={disabled}
+			{...props}
 		>
-			{loader && <Loader />}
-			{children}
+			{props.loader && <Loader />}
+			{props.children}
 		</button>
 	);
 }
