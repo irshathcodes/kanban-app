@@ -35,24 +35,24 @@ export default function User() {
 	return (
 		<div
 			ref={userRef}
-			className="capitalize relative flex items-center justify-between bg-neutral-900 text-slate-300 font-semibold w-full p-3 text-left rounded-md"
+			className="relative flex w-full items-center justify-between rounded-md bg-neutral-900 p-3 text-left font-semibold capitalize text-slate-300"
 		>
 			<button
 				onClick={() => setShowOptions(!showOptions)}
 				className="flex items-center "
 			>
-				<UserCircleIcon className="w-6 h-6 mr-1 text-primary-400" />
+				<UserCircleIcon className="mr-1 h-6 w-6 text-primary-400" />
 				<span className="capitalize">
 					{isLoading ? "logging out..." : data ? data.name : "welcome"}
 				</span>
 				<ChevronRightIcon
-					className={`w-4 h-4 transition-transform ${
+					className={`h-4 w-4 transition-transform ${
 						showOptions ? "rotate-[270deg]" : "rotate-0"
 					}`}
 				/>
 			</button>
 			<button onClick={() => mutate()}>
-				<ArrowRightOnRectangleIcon className="w-5 h-5 text-slate-300" />
+				<ArrowRightOnRectangleIcon className="h-5 w-5 text-slate-300" />
 			</button>
 			<UserOptions
 				showOptions={showOptions}
@@ -84,14 +84,14 @@ const UserOptions = forwardRef(
 		return (
 			<div
 				ref={ref}
-				className={`absolute w-full transition-transform right-0 ease-linear bg-neutral-900 p-2  rounded ${
+				className={`absolute right-0 w-full rounded bg-neutral-900 p-2 transition-transform  ease-linear ${
 					showOptions ? "-translate-y-[85%] " : "translate-y-16 "
 				} `}
 			>
 				{userType === "user" && (
 					<button
 						onClick={() => navigate("/change-password")}
-						className="block py-2 border rounded w-full border-neutral-900 hover:bg-primary-600  px-2 border-b-slate-700 capitalize transition-all"
+						className="block w-full rounded border border-neutral-900 border-b-slate-700 py-2  px-2 capitalize transition-all hover:bg-primary-600"
 					>
 						change password
 					</button>
@@ -99,7 +99,7 @@ const UserOptions = forwardRef(
 
 				<button
 					onClick={() => mutateDelete()}
-					className="block py-2 hover:bg-red-600 rounded w-full px-2 capitalize transition-all"
+					className="block w-full rounded py-2 px-2 capitalize transition-all hover:bg-red-600"
 				>
 					{isLoading ? "deleting..." : "delete account"}
 				</button>

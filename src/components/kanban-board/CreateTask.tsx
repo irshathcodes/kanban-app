@@ -68,7 +68,7 @@ export default function CreateTask() {
 			<form onSubmit={handleSubmit} className="text-slate-200">
 				<div className="flex items-center justify-between">
 					<h2 className="text-lg font-semibold capitalize">add new task</h2>
-					<XMarkIcon className="w-7 h-7" onClick={() => navigate(-1)} />
+					<XMarkIcon className="h-7 w-7" onClick={() => navigate(-1)} />
 				</div>
 
 				<Label name="title" />
@@ -84,7 +84,7 @@ export default function CreateTask() {
 				<Label name="description" />
 				<textarea
 					name="description"
-					className="bg-transparent rounded-md w-full"
+					className="w-full rounded-md bg-transparent"
 					value={data.description}
 					onChange={(e) => setData({ ...data, description: e.target.value })}
 				></textarea>
@@ -93,7 +93,7 @@ export default function CreateTask() {
 				<SubTaskInput subTasks={subTasks} setsubTasks={setsubTasks} />
 
 				<Button
-					className="!my-0 mb-2 w-fit text-sm text-slate-300 px-4 !bg-transparent"
+					className="!my-0 mb-2 w-fit !bg-transparent px-4 text-sm text-slate-300"
 					onClick={() => setsubTasks([...subTasks, { subTask: "" }])}
 				>
 					Add more tasks
@@ -101,7 +101,7 @@ export default function CreateTask() {
 
 				<Label name="status" />
 				<Select values={status} disabled={true} styles="cursor-not-allowed" />
-				{notify && <p className="mt-4 text-red-600 text-bold">{error}</p>}
+				{notify && <p className="text-bold mt-4 text-red-600">{error}</p>}
 
 				<Button type="submit" loader={isLoading} className="rounded-full py-2">
 					{isLoading

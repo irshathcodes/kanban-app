@@ -54,15 +54,15 @@ export default function VerifyUser() {
 	}, []);
 
 	return (
-		<div className="w-full flex pt-20 justify-center h-screen text-center">
+		<div className="flex h-screen w-full justify-center pt-20 text-center">
 			<form
 				onSubmit={(e) => handleSubmit(e)}
-				className="w-96 shadow-lg p-8 m-2 rounded-md h-fit border border-slate-700 "
+				className="m-2 h-fit w-96 rounded-md border border-slate-700 p-8 shadow-lg "
 			>
-				<h1 className="text-slate-200  text-2xl font-semibold tracking-tighter">
+				<h1 className="text-2xl  font-semibold tracking-tighter text-slate-200">
 					Verify your account
 				</h1>
-				<label htmlFor="otp" className="text-slate-400 block my-6">
+				<label htmlFor="otp" className="my-6 block text-slate-400">
 					Enter your six digit one time password
 					<input
 						type="number"
@@ -73,13 +73,13 @@ export default function VerifyUser() {
 						required
 						value={otp}
 						onChange={handleChange}
-						className={`bg-transparent w-28 mt-4 focus:ring-0  mx-auto block rounded-md text-slate-300 text-xl font-semibold ${
+						className={`mx-auto mt-4 block w-28  rounded-md bg-transparent text-xl font-semibold text-slate-300 focus:ring-0 ${
 							error ? "focus:border-red-500" : ""
 						}`}
 					/>
 				</label>
 				{error || notify ? (
-					<p className="text-red-600 font-semibold">{error}</p>
+					<p className="font-semibold text-red-600">{error}</p>
 				) : (
 					""
 				)}

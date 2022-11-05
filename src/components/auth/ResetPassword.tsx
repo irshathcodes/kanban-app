@@ -56,17 +56,17 @@ export default function ResetPassword() {
 	useFocus(inputRef);
 
 	return (
-		<div className="w-full flex pt-20 justify-center h-screen ">
+		<div className="flex h-screen w-full justify-center pt-20 ">
 			<form
 				onSubmit={(e) => handleSubmit(e)}
-				className="w-96 shadow-lg p-8 m-2 rounded-md h-fit border border-slate-700 "
+				className="m-2 h-fit w-96 rounded-md border border-slate-700 p-8 shadow-lg "
 			>
-				<h1 className="text-slate-200  text-2xl font-semibold tracking-tighter text-center">
+				<h1 className="text-center  text-2xl font-semibold tracking-tighter text-slate-200">
 					Enter your new password
 				</h1>
 				<label
 					htmlFor="password"
-					className="text-slate-400  text-left block my-6"
+					className="my-6  block text-left text-slate-400"
 				>
 					new password
 					<input
@@ -78,14 +78,14 @@ export default function ResetPassword() {
 						minLength={8}
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
-						className={`bg-transparent  mt-2 focus:ring-0   block rounded-md text-slate-300 w-full font-medium ${
+						className={`mt-2  block w-full   rounded-md bg-transparent font-medium text-slate-300 focus:ring-0 ${
 							error ? "focus:border-red-500" : ""
 						}`}
 					/>
 				</label>
 				<label
 					htmlFor="confirmPassword"
-					className="text-slate-400  text-left block my-6"
+					className="my-6  block text-left text-slate-400"
 				>
 					confirm password
 					<input
@@ -96,13 +96,13 @@ export default function ResetPassword() {
 						minLength={8}
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
-						className={`bg-transparent  mt-2 focus:ring-0   block rounded-md text-slate-300 w-full font-medium ${
+						className={`mt-2  block w-full   rounded-md bg-transparent font-medium text-slate-300 focus:ring-0 ${
 							error ? "focus:border-red-500" : ""
 						}`}
 					/>
 				</label>
 				{error || notify ? (
-					<p className="text-red-500 font-semibold">{error}</p>
+					<p className="font-semibold text-red-500">{error}</p>
 				) : (
 					""
 				)}

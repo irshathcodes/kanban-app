@@ -9,7 +9,7 @@ interface Props {
 export default function Select(props: Props) {
 	return (
 		<select
-			className={`bg-transparent rounded-md  w-full py-1 ${
+			className={`w-full rounded-md  bg-transparent py-1 ${
 				props.styles && props.styles
 			}`}
 			{...props}

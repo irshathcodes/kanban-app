@@ -29,7 +29,7 @@ export default function TaskList() {
 			/>
 
 			<main>
-				<div className="flex p-6 gap-6">
+				<div className="flex gap-6 p-6">
 					{allStatus?.map((status, i) => {
 						const filteredTask = tasks?.filter(
 							(todo) => todo.status === status
@@ -37,7 +37,7 @@ export default function TaskList() {
 
 						return (
 							<section key={getId()} className="w-72">
-								<h3 className="text-slate-400 uppercase text-sm pl-1 font-semibold tracking-wide flex items-center">
+								<h3 className="flex items-center pl-1 text-sm font-semibold uppercase tracking-wide text-slate-400">
 									<span className={`circle circle-${i + 1}`}></span>
 									<span className="inline-block">
 										{status} ({filteredTask?.length || 0})

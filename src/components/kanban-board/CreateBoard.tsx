@@ -53,11 +53,11 @@ export default function CreateBoard() {
 			{showInput && (
 				<form
 					onSubmit={handleSubmit}
-					className="flex items-center text-slate-400 gap-2 mx-2"
+					className="mx-2 flex items-center gap-2 text-slate-400"
 				>
 					<input
 						type="text"
-						className="bg-transparent py-1 rounded-md capitalize  focus:outline-none  w-full text-slate-200"
+						className="w-full rounded-md bg-transparent py-1  capitalize  text-slate-200 focus:outline-none"
 						style={{ cursor: isLoading ? "not-allowed" : "text" }}
 						ref={inputRef}
 						required={true}
@@ -65,9 +65,9 @@ export default function CreateBoard() {
 					/>
 					<button
 						type="submit"
-						className=" active:border-primary-500 border-2 p-1 border-zinc-600 rounded-md"
+						className=" rounded-md border-2 border-zinc-600 p-1 active:border-primary-500"
 					>
-						<CheckIcon className="w-5 h-5" />
+						<CheckIcon className="h-5 w-5" />
 					</button>
 				</form>
 			)}
@@ -83,10 +83,10 @@ export default function CreateBoard() {
 			<button
 				type="button"
 				onClick={() => setShowInput(!showInput)}
-				className="pl-6 my-3 text-primary-500/80"
+				className="my-3 pl-6 text-primary-500/80"
 			>
 				<div className="flex items-center  font-medium">
-					{!showInput && <PlusIcon className="w-4 h-4" />}
+					{!showInput && <PlusIcon className="h-4 w-4" />}
 					{showInput ? "Cancel" : "Create new board"}
 				</div>
 			</button>

@@ -76,11 +76,11 @@ export default function UpdateTask() {
 	return (
 		<Modal className="py-8 px-8 text-slate-200">
 			<form onSubmit={handleSubmit}>
-				<h1 className="text-2xl font-semibold first-letter:uppercase mb-4">
+				<h1 className="mb-4 text-2xl font-semibold first-letter:uppercase">
 					{taskName}
 				</h1>
 
-				<p className="text-slate-400 mb-4">{description && description}</p>
+				<p className="mb-4 text-slate-400">{description && description}</p>
 
 				<div className="mt-8 mb-3 ">
 					Subtasks ({completedTask} of {subTasks.length})
@@ -90,14 +90,14 @@ export default function UpdateTask() {
 						<label
 							htmlFor={`${subTask}-${_id}`}
 							key={_id}
-							className={`cursor-pointer flex items-center w-full bg-zinc-900 mb-2 py-2 px-4 text-slate-400 rounded select-none ${
+							className={`mb-2 flex w-full cursor-pointer select-none items-center rounded bg-zinc-900 py-2 px-4 text-slate-400 ${
 								completed ? "line-through" : ""
 							} `}
 						>
 							<input
 								type="checkbox"
 								id={`${subTask}-${_id}`}
-								className="mr-3 bg-transparent cursor-pointer"
+								className="mr-3 cursor-pointer bg-transparent"
 								checked={completed}
 								onChange={() => handleSubTaskChange(_id)}
 							/>
@@ -123,13 +123,13 @@ export default function UpdateTask() {
 					<Button
 						onClick={() => deleteMutate(_id)}
 						loader={isDeleting}
-						className="!bg-transparent mt-0 transition-all hover:text-red-500/70 text-red-500/90 hover:text-red-500"
+						className="mt-0 !bg-transparent text-red-500/90 transition-all hover:text-red-500/70 hover:text-red-500"
 					>
 						Delete Task
 					</Button>
 				</div>
 			</form>
-			<p className="text-center text-red-500 font-medium">{error && error}</p>
+			<p className="text-center font-medium text-red-500">{error && error}</p>
 		</Modal>
 	);
 }

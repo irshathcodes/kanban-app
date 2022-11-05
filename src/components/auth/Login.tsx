@@ -49,7 +49,7 @@ export default function Login() {
 					Sign in to your account
 				</h1>
 
-				<p className="text-center  text-sm w-full font-medium">
+				<p className="w-full  text-center text-sm font-medium">
 					or don't have an account?{" "}
 					<Link to="/register" className="text-primary-600 underline">
 						sign up for free
@@ -87,7 +87,7 @@ export default function Login() {
 					<button
 						type="button"
 						onClick={() => navigate("/change-password")}
-						className="text-sm text-primary-600 font-medium hover:underline"
+						className="text-sm font-medium text-primary-600 hover:underline"
 					>
 						Forgot your password?
 					</button>
@@ -97,7 +97,7 @@ export default function Login() {
 					</Button>
 				</form>
 
-				{notify && <p className="text-center text-red-600 my-4">{error}</p>}
+				{notify && <p className="my-4 text-center text-red-600">{error}</p>}
 
 				<GuestLogin />
 			</div>

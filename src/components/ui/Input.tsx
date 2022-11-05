@@ -20,7 +20,7 @@ const Input = forwardRef(
 				placeholder={placeholder}
 				name={name}
 				ref={ref}
-				className={`block bg-transparent shadow-sm rounded-md w-full mb-4 py-1 ring-primary-500 ${
+				className={`mb-4 block w-full rounded-md bg-transparent py-1 shadow-sm ring-primary-500 ${
 					className && className
 				}`}
 				onChange={onChange}

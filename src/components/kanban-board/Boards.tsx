@@ -12,17 +12,17 @@ export default function Boards() {
 
 	return (
 		<div className="overflow-y-auto overflow-x-hidden">
-			<p className="uppercase  pl-6 font-semibold text-slate-400 my-8 tracking-wide text-sm">
+			<p className="my-8  pl-6 text-sm font-semibold uppercase tracking-wide text-slate-400">
 				all boards ({boards?.length || 0})
 			</p>
 			{boards && boards.length > 0 ? (
-				<ul className="capitalize font-medium ">
+				<ul className="font-medium capitalize ">
 					{boards?.map((board) => {
 						return <BoardList board={board} boards={boards} key={getId()} />;
 					})}
 				</ul>
 			) : (
-				<p className="text-slate-400 text-sm pl-6 mb-2">
+				<p className="mb-2 pl-6 text-sm text-slate-400">
 					start creating boards to add your tasks{" "}
 					<span className="text-base">👇</span>
 				</p>

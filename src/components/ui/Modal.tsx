@@ -25,12 +25,12 @@ export default function Modal({
 	return (
 		<>
 			<div
-				className="top-0 left-0 right-0 bottom-0 fixed bg-black/30 z-40"
+				className="fixed top-0 left-0 right-0 bottom-0 z-40 bg-black/30"
 				onClick={back}
 			></div>
 
 			<div
-				className={`w-[32rem]  fixed max-h-[90%] z-50 top-1/2 left-1/2 -translate-x-2/4 -translate-y-1/2 bg-zinc-800  rounded-lg  px-8 py-8 overflow-auto ${
+				className={`fixed  top-1/2 left-1/2 z-50 max-h-[90%] w-[32rem] -translate-x-2/4 -translate-y-1/2 overflow-auto  rounded-lg  bg-zinc-800 px-8 py-8 ${
 					className ? className : ""
 				}`}
 			>

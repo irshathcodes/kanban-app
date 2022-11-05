@@ -14,7 +14,7 @@ export default function Button(
 	return (
 		<button
 			type={type}
-			className={`my-8 w-full rounded bg-primary-600 py-2 mb-4 font-semibold text-slate-100 capitalize ring-primary-100 focus:outline-primary-100 focus:ring-2 flex items-center justify-center ${className}`}
+			className={`my-8 mb-4 flex w-full items-center justify-center rounded bg-primary-600 py-2 font-semibold capitalize text-slate-100 ring-primary-100 focus:outline-primary-100 focus:ring-2 ${className}`}
 			{...rest}
 		>
 			{loader && <Loader />}

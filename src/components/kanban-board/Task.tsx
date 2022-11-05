@@ -25,9 +25,9 @@ export default function Task({ task, allStatus }: Props) {
 	return (
 		<section
 			onClick={() => handleClick(_id)}
-			className="cursor-pointer bg-zinc-800/50 backdrop-blur-sm w-60 p-4 my-4 rounded-md"
+			className="my-4 w-60 cursor-pointer rounded-md bg-zinc-800/50 p-4 backdrop-blur-sm"
 		>
-			<h1 className="text-slate-200 pb-2 ">{todoName}</h1>
+			<h1 className="pb-2 text-slate-200 ">{todoName}</h1>
 			<p className="text-slate-400">
 				{completedTask} of {subTasks.length} substasks
 			</p>

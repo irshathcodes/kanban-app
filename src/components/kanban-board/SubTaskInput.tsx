@@ -26,7 +26,7 @@ export default function SubTaskInput({ subTasks, setsubTasks }: Props) {
 		<>
 			{subTasks.map((input, i) => {
 				return (
-					<div key={i} className="flex  gap-2 items-center mb-4">
+					<div key={i} className="mb-4  flex items-center gap-2">
 						<Input
 							placeholder={subTaskPlaceholders[i]}
 							className="mb-0"
@@ -36,7 +36,7 @@ export default function SubTaskInput({ subTasks, setsubTasks }: Props) {
 						/>
 						<XMarkIcon
 							onClick={() => handleRemove(i)}
-							className="w-5 h-5 text-slate-400"
+							className="h-5 w-5 text-slate-400"
 						/>
 					</div>
 				);

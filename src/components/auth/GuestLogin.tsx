@@ -12,7 +12,7 @@ export default function GuestLogin() {
 
 	return (
 		<button
-			className="w-full text-primary-600 font-semibold underline"
+			className="w-full font-semibold text-primary-600 underline"
 			onClick={() => mutate()}
 		>
 			{isLoading ? "Creating guest credentials..." : "Login as a guest"}
