@@ -47,8 +47,6 @@ export default function CreateTask() {
 			(item) => item.subTask.trim().length > 0
 		);
 
-		console.log(enteredSubTasks);
-
 		if (enteredSubTasks.length === 0) {
 			setError("please enter atleast one subtask to create a task");
 			showNotify();

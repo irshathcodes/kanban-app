@@ -44,8 +44,8 @@ export default function Register() {
 
 	return (
 		<>
-			<div className="flex h-screen flex-col items-center bg-gray-50 pt-20 ">
-				<div className="w-96 rounded-md border border-gray-200 px-6 py-6 ">
+			<div className="flex h-screen justify-center bg-gray-50 pt-12 ">
+				<div className="w-96 rounded-md border m-2 border-gray-200 px-6 py-6 ">
 					<h1 className="py-2 text-center text-2xl font-bold capitalize">
 						Sign up
 					</h1>
