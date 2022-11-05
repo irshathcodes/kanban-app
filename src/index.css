@@ -17,8 +17,27 @@
 @layer base {
 	input[type="number"]::-webkit-inner-spin-button,
 	input[type="number"]::-webkit-outer-spin-button {
-		-webkit-appearance: none;
+		appearance: none;
 		margin: 0;
+	}
+
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+
+	::-webkit-scrollbar-track {
+		border-radius: 100vh;
+		background: theme("colors.zinc.800");
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: theme("colors.zinc.600");
+		border-radius: 100vh;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: theme("colors.zinc.500");
 	}
 }
 

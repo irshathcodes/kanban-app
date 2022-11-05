@@ -68,7 +68,10 @@ export default function CreateTask() {
 			<form onSubmit={handleSubmit} className="text-slate-200">
 				<div className="flex items-center justify-between">
 					<h2 className="text-lg font-semibold capitalize">add new task</h2>
-					<XMarkIcon className="h-7 w-7" onClick={() => navigate(-1)} />
+					<XMarkIcon
+						className="h-7 w-7 cursor-pointer"
+						onClick={() => navigate(-1)}
+					/>
 				</div>
 
 				<Label name="title" />

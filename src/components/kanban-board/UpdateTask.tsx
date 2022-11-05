@@ -1,10 +1,11 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Button, Label, Modal, Select } from "../ui/Index";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useNavigationType } from "react-router-dom";
 import Todos from "../../models/Todos";
 import updateTask from "../../api/updateTask";
 import useMutateTask from "../hooks/useMutateTask";
 import deleteTask from "../../api/deleteTask";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 interface State {
 	task: Todos;
@@ -26,6 +27,8 @@ export default function UpdateTask() {
 	const [subTasks, setSubTasks] = useState(subTasksList);
 	const [status, setStatus] = useState(currentStatus);
 	const [error, setError] = useState("");
+
+	const navigate = useNavigate();
 
 	const { mutate, isLoading, isError } = useMutateTask(updateTask);
 	const {
@@ -76,11 +79,18 @@ export default function UpdateTask() {
 	return (
 		<Modal className="py-8 px-8 text-slate-200">
 			<form onSubmit={handleSubmit}>
-				<h1 className="mb-4 text-2xl font-semibold first-letter:uppercase">
-					{taskName}
-				</h1>
-
-				<p className="mb-4 text-slate-400">{description && description}</p>
+				<div className="flex items-center justify-between">
+					<h1 className="mb-4 text-2xl font-semibold first-letter:uppercase">
+						{taskName}
+					</h1>
+					<XMarkIcon
+						className="h-7 w-7 cursor-pointer"
+						onClick={() => navigate(-1)}
+					/>
+				</div>
+				<p className="mb-4 text-slate-400">
+					{description ? description : "no description"}
+				</p>
 
 				<div className="mt-8 mb-3 ">
 					Subtasks ({completedTask} of {subTasks.length})

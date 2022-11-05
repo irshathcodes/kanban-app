@@ -19,7 +19,7 @@ export default function Sidebar(props: Props) {
 				} md:hidden`}
 			></div>
 			<aside
-				className={`fixed top-0 left-0  z-50  h-screen w-[270px] overflow-hidden border border-zinc-800 border-r-gray-500 bg-zinc-800 pr-2	transition-transform duration-300 ease-out md:sticky md:translate-x-0  ${
+				className={`fixed top-0 left-0  z-50 h-full  w-[270px] overflow-hidden border border-zinc-800 border-r-gray-500 bg-zinc-800 pr-2 transition-transform	duration-300 ease-out sm:h-screen md:sticky md:translate-x-0  ${
 					showBoard ? "translate-x-0" : "-translate-x-full"
 				}   ${className}`}
 			>

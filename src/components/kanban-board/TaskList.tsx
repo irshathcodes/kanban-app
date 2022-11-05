@@ -28,7 +28,7 @@ export default function TaskList() {
 				}}
 			/>
 
-			<main className="mr-4 h-[calc(100vh-40px)] overflow-auto md:h-auto">
+			<main className="mr-4 h-[calc(100vh-60px)] overflow-x-auto  md:h-auto">
 				<div className="flex  gap-6 p-6">
 					{allStatus?.map((status, i) => {
 						const filteredTask = tasks?.filter(

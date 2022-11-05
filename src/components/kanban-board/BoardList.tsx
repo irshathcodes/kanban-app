@@ -3,6 +3,7 @@ import { TrashIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import deleteBoard from "../../api/deleteBoard";
+import useAppContext from "../hooks/useAppContext";
 import useMutateBoard from "../hooks/useMutateBoard";
 import { Loader } from "../ui/Index";
 
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export default function BoardList({ board, boards }: Props) {
+	const { setShowBoard } = useAppContext();
 	const [hover, setHover] = useState(false);
 	const { mutate, isLoading } = useMutateBoard(deleteBoard);
 	const navigate = useNavigate();
@@ -31,7 +33,7 @@ export default function BoardList({ board, boards }: Props) {
 	};
 
 	return (
-		<NavLink to={`/${board}`}>
+		<NavLink to={`/${board}`} onClick={() => setShowBoard(false)}>
 			{({ isActive }) => (
 				<li
 					className={`mb-3 cursor-pointer rounded-r-full px-4 py-2  text-base transition-all ${
