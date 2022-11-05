@@ -28,15 +28,14 @@ export default function TaskList() {
 				}}
 			/>
 
-			<main className="mr-4 h-[calc(100vh-40px)] overflow-x-auto sm:h-auto">
-				<div className="flex gap-6  p-6">
+			<main className="mr-4 h-[calc(100vh-40px)] overflow-auto md:h-auto">
+				<div className="flex  gap-6 p-6">
 					{allStatus?.map((status, i) => {
 						const filteredTask = tasks?.filter(
 							(todo) => todo.status === status
 						);
-
 						return (
-							<section key={getId()} className="">
+							<section key={getId()} className="w-60">
 								<h3 className="flex  items-center pl-1 text-sm font-semibold uppercase tracking-wide text-slate-400 ">
 									<span className={`circle circle-${i + 1}`}></span>
 									<span className="inline-block">

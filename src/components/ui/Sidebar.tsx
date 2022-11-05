@@ -14,12 +14,12 @@ export default function Sidebar(props: Props) {
 		<>
 			<div
 				onClick={() => setShowBoard(false)}
-				className={`absolute h-screen w-full ${
-					showBoard && "z-40 bg-black/30"
-				} sm:hidden`}
+				className={`fixed   h-full w-full ${
+					showBoard ? "z-40 bg-black/30" : "-z-10"
+				} md:hidden`}
 			></div>
 			<aside
-				className={`absolute top-0 left-0 z-50  h-screen  w-[270px] overflow-hidden border border-zinc-800 border-r-gray-500 bg-zinc-800 pr-2 transition-transform	duration-300 ease-out sm:sticky sm:translate-x-0  ${
+				className={`fixed top-0 left-0  z-50  h-screen w-[270px] overflow-hidden border border-zinc-800 border-r-gray-500 bg-zinc-800 pr-2	transition-transform duration-300 ease-out md:sticky md:translate-x-0  ${
 					showBoard ? "translate-x-0" : "-translate-x-full"
 				}   ${className}`}
 			>
