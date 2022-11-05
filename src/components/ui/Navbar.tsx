@@ -13,7 +13,7 @@ export default function Navbar() {
 			<button type="button" onClick={() => setShowBoard(!showBoard)}>
 				<h1 className="flex items-center   text-lg font-semibold capitalize text-slate-100 ">
 					<KanbanLogo className="mr-1 sm:hidden" />
-					<span>{board}</span>
+					<span>{board ? board : "Add a board"}</span>
 					<ChevronRightIcon
 						className={`mr-1 h-4 w-4 transition-transform sm:hidden ${
 							showBoard ? "rotate-[180deg]" : "rotate-0"
