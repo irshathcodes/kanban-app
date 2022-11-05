@@ -8,6 +8,9 @@ module.exports = {
 			colors: {
 				primary: colors.indigo,
 			},
+			// screens: {
+			// 	mobile: { max: "640px" },
+			// },
 		},
 	},
 	plugins: [require("@tailwindcss/forms")],

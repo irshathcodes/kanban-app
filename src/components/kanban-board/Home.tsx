@@ -6,7 +6,7 @@ import User from "./user/User";
 export default function Home() {
 	return (
 		<>
-			<div className="grid grid-cols-[270px_1fr] bg-neutral-900">
+			<div className="bg-neutral-900 sm:grid sm:grid-cols-[270px_1fr]">
 				<Sidebar className="grid grid-rows-[56px_1fr_54px]">
 					<Boards />
 					<User />

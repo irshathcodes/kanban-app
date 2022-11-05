@@ -1,4 +1,5 @@
-import kanbanLogo from "../../assets/kanban-logo.png";
+import KanbanLogo from "../../assets/KanbanLogo";
+import useAppContext from "../hooks/useAppContext";
 
 interface Props {
 	className?: string;
@@ -6,18 +7,29 @@ interface Props {
 }
 
 export default function Sidebar(props: Props) {
-	return (
-		<aside
-			className={`sticky top-0  h-screen overflow-x-hidden overflow-y-hidden border	border-zinc-800 border-r-gray-500 bg-zinc-800 pr-2 ${
-				props.className ? props.className : ""
-			}`}
-		>
-			<div className="flex h-14 items-center gap-2 pl-6">
-				<img src={kanbanLogo} alt="kanban logo" width={24} height={24} />
-				<h1 className="text-2xl font-bold text-slate-200">Kanban</h1>
-			</div>
+	const { showBoard, setShowBoard } = useAppContext();
 
-			{props.children}
-		</aside>
+	const className = props.className ? props.className : "";
+	return (
+		<>
+			<div
+				onClick={() => setShowBoard(false)}
+				className={`absolute h-screen w-full ${
+					showBoard && "z-40 bg-black/30"
+				} sm:hidden`}
+			></div>
+			<aside
+				className={`absolute top-0 left-0 z-50  h-screen  w-[270px] overflow-hidden border border-zinc-800 border-r-gray-500 bg-zinc-800 pr-2 transition-transform	duration-100 ease-linear sm:sticky sm:translate-x-0  ${
+					showBoard ? "translate-x-0" : "-translate-x-full"
+				}   ${className}`}
+			>
+				<div className="flex h-14 items-center gap-2 pl-6">
+					<KanbanLogo />
+					<h1 className="text-2xl font-bold text-slate-200">Kanban</h1>
+				</div>
+
+				{props.children}
+			</aside>
+		</>
 	);
 }
