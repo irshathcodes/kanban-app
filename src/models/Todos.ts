@@ -42,6 +42,8 @@ export interface CreateBoard {
 	board: string;
 }
 
+export type BoardList = string[];
+
 export interface GetBoards {
 	boards: Board[];
 }

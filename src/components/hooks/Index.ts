@@ -1,6 +1,6 @@
 import useEscape from "./useEscape";
 import useFocus from "./useFocus";
-import useMutateBoard from "./useMutateBoard";
+import useAddBoard from "./query-hooks/useAddBoard";
 import useMutateTask from "./useMutateTask";
 import useNotify from "./useNotify";
 import useOutsideClick from "./useOutsideClick";
@@ -8,7 +8,7 @@ import useOutsideClick from "./useOutsideClick";
 export {
 	useEscape,
 	useFocus,
-	useMutateBoard,
+	useAddBoard,
 	useMutateTask,
 	useNotify,
 	useOutsideClick,

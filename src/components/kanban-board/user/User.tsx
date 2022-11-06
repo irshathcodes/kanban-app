@@ -15,7 +15,9 @@ export default function User() {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 
-	const { data } = useQuery(["get-user"], getUser);
+	const { data } = useQuery(["get-user"], getUser, {
+		refetchOnWindowFocus: false,
+	});
 	const { mutate, isLoading } = useMutation(logout, {
 		onSuccess: () => {
 			queryClient.removeQueries();

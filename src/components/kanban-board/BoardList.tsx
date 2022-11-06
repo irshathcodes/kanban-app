@@ -2,10 +2,9 @@ import { RectangleGroupIcon } from "@heroicons/react/20/solid";
 import { TrashIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import deleteBoard from "../../api/deleteBoard";
 import useAppContext from "../hooks/useAppContext";
-import useMutateBoard from "../hooks/useMutateBoard";
 import { Loader } from "../ui/Index";
+import useDeleteBoard from "../hooks/query-hooks/useDeleteBoard";
 
 interface Props {
 	board: string;
@@ -15,22 +14,13 @@ interface Props {
 export default function BoardList({ board, boards }: Props) {
 	const { setShowSidebar } = useAppContext();
 	const [hover, setHover] = useState(false);
-	const { mutate, isLoading } = useMutateBoard(deleteBoard);
+	const { mutate, isLoading } = useDeleteBoard();
 	const navigate = useNavigate();
 	const { board: boardFromParams } = useParams();
 
 	const handleDelete = (e: React.MouseEvent, board: string) => {
 		e.preventDefault();
-		mutate(board, {
-			onSuccess: () => {
-				if (boards.length === 1) {
-					navigate("/");
-					return;
-				} else {
-					navigate(`/${boards[0]}`);
-				}
-			},
-		});
+		mutate(board);
 		e.stopPropagation();
 	};
 
