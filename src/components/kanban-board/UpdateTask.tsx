@@ -135,7 +135,7 @@ export default function UpdateTask() {
 						loader={isDeleting}
 						className="mt-0 !bg-transparent text-red-500/90 transition-all hover:text-red-500/70 hover:text-red-500"
 					>
-						Delete Task
+						{isDeleting ? "Deleting..." : "Delete Task"}
 					</Button>
 				</div>
 			</form>
