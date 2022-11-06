@@ -57,7 +57,7 @@ export default function CreateBoard() {
 				>
 					<input
 						type="text"
-						className="w-full rounded-md bg-transparent py-1  capitalize  text-slate-200 focus:outline-none"
+						className="w-full rounded-md border-slate-400 bg-transparent py-1  capitalize  text-slate-800 focus:outline-none dark:text-slate-200"
 						style={{ cursor: isLoading ? "not-allowed" : "text" }}
 						ref={inputRef}
 						required={true}
@@ -65,7 +65,7 @@ export default function CreateBoard() {
 					/>
 					<button
 						type="submit"
-						className=" rounded-md border-2 border-zinc-600 p-1 active:border-primary-500"
+						className=" rounded-md border-2 border-slate-400 p-1 focus:border-primary-500 dark:border-zinc-600 dark:focus:border-primary-500"
 					>
 						<CheckIcon className="h-5 w-5" />
 					</button>
@@ -83,7 +83,7 @@ export default function CreateBoard() {
 			<button
 				type="button"
 				onClick={() => setShowInput(!showInput)}
-				className="my-3 pl-6 text-primary-500/80"
+				className="my-3 pl-6 text-primary-600 dark:text-primary-500/80"
 			>
 				<div className="flex items-center  font-medium">
 					{!showInput && <PlusIcon className="h-4 w-4" />}

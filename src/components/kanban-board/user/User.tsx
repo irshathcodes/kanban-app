@@ -35,24 +35,24 @@ export default function User() {
 	return (
 		<div
 			ref={userRef}
-			className="relative flex w-full items-center justify-between rounded-md bg-neutral-900 p-3 text-left font-semibold capitalize text-slate-300"
+			className="relative flex w-full items-center justify-between rounded-md bg-slate-300 p-3  text-left font-semibold capitalize text-slate-300  dark:bg-neutral-900"
 		>
 			<button
 				onClick={() => setShowOptions(!showOptions)}
 				className="flex items-center "
 			>
-				<UserCircleIcon className="mr-1 h-6 w-6 text-primary-400" />
-				<span className="capitalize">
+				<UserCircleIcon className="mr-1 h-6 w-6 text-primary-600 dark:text-primary-400" />
+				<span className="capitalize text-slate-800 dark:text-slate-200">
 					{isLoading ? "logging out..." : data ? data.name : "welcome"}
 				</span>
 				<ChevronRightIcon
-					className={`h-4 w-4 transition-transform ${
+					className={`h-4 w-4 text-slate-800 transition-transform dark:text-slate-200 ${
 						showOptions ? "rotate-[270deg]" : "rotate-0"
 					}`}
 				/>
 			</button>
 			<button onClick={() => mutate()}>
-				<ArrowRightOnRectangleIcon className="h-5 w-5 text-slate-300" />
+				<ArrowRightOnRectangleIcon className="h-5 w-5 text-slate-800 dark:text-slate-200 " />
 			</button>
 			<UserOptions
 				showOptions={showOptions}
@@ -84,14 +84,14 @@ const UserOptions = forwardRef(
 		return (
 			<div
 				ref={ref}
-				className={`absolute right-0 w-full rounded bg-neutral-900 p-2 transition-transform  ease-linear ${
+				className={`absolute right-0 w-full rounded bg-slate-300 p-2  transition-transform ease-linear  dark:bg-neutral-900 ${
 					showOptions ? "-translate-y-[85%] " : "translate-y-16 "
 				} `}
 			>
 				{userType === "user" && (
 					<button
 						onClick={() => navigate("/change-password")}
-						className="block w-full rounded border border-neutral-900 border-b-slate-700 py-2  px-2 capitalize transition-all hover:bg-primary-600"
+						className="block w-full rounded border   border-slate-300 border-b-slate-500 py-2 px-2  capitalize text-slate-800 transition-all hover:bg-primary-500 hover:text-slate-200  dark:border-neutral-900 dark:border-b-slate-600 dark:text-slate-200"
 					>
 						change password
 					</button>
@@ -99,7 +99,7 @@ const UserOptions = forwardRef(
 
 				<button
 					onClick={() => mutateDelete()}
-					className="block w-full rounded py-2 px-2 capitalize transition-all hover:bg-red-600"
+					className=" block w-full rounded py-2 px-2 capitalize text-slate-800 transition-all hover:bg-red-600 hover:text-slate-200 dark:text-slate-200"
 				>
 					{isLoading ? "deleting..." : "delete account"}
 				</button>

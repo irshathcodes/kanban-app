@@ -44,14 +44,17 @@ export default function Register() {
 
 	return (
 		<>
-			<div className="flex h-screen justify-center bg-gray-50 pt-12 ">
-				<div className="m-2 w-96 rounded-md border border-gray-200 px-6 py-6 ">
-					<h1 className="py-2 text-center text-2xl font-bold capitalize">
+			<div className="flex h-screen justify-center bg-gray-50 dark:bg-neutral-900 sm:items-center ">
+				<div className="m-2 mt-12 h-fit w-96 rounded-md border border-gray-200 p-6 dark:border-zinc-700 dark:bg-zinc-800 sm:mt-0   ">
+					<h1 className="py-2 text-center text-2xl font-bold capitalize dark:text-slate-200">
 						Sign up
 					</h1>
-					<p className="w-full text-center font-medium">
+					<p className="w-full text-center font-medium dark:text-slate-400">
 						already have an account?{" "}
-						<Link to="/login" className="text-primary-600 underline">
+						<Link
+							to="/login"
+							className="text-primary-600 underline dark:text-primary-400"
+						>
 							Login
 						</Link>
 					</p>

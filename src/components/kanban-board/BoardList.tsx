@@ -1,6 +1,6 @@
 import { RectangleGroupIcon } from "@heroicons/react/20/solid";
 import { TrashIcon } from "@heroicons/react/20/solid";
-import { useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import deleteBoard from "../../api/deleteBoard";
 import useAppContext from "../hooks/useAppContext";
@@ -13,13 +13,14 @@ interface Props {
 }
 
 export default function BoardList({ board, boards }: Props) {
-	const { setShowBoard } = useAppContext();
+	const { setShowSidebar } = useAppContext();
 	const [hover, setHover] = useState(false);
 	const { mutate, isLoading } = useMutateBoard(deleteBoard);
 	const navigate = useNavigate();
 	const { board: boardFromParams } = useParams();
 
-	const handleDelete = (board: string) => {
+	const handleDelete = (e: React.MouseEvent, board: string) => {
+		e.preventDefault();
 		mutate(board, {
 			onSuccess: () => {
 				if (boards.length === 1) {
@@ -30,15 +31,17 @@ export default function BoardList({ board, boards }: Props) {
 				}
 			},
 		});
+		e.stopPropagation();
 	};
 
 	return (
-		<NavLink to={`/${board}`} onClick={() => setShowBoard(false)}>
+		<NavLink to={`/${board}`}>
 			{({ isActive }) => (
 				<li
 					className={`mb-3 cursor-pointer rounded-r-full px-4 py-2  text-base transition-all ${
 						(isActive || boardFromParams === board) && " bg-primary-500"
 					}`}
+					onClick={() => setShowSidebar(false)}
 					onMouseEnter={() => setHover(true)}
 					onMouseLeave={() => setHover(false)}
 				>
@@ -46,7 +49,7 @@ export default function BoardList({ board, boards }: Props) {
 						className={`flex items-center justify-between ${
 							isActive || boardFromParams === board
 								? "text-slate-100"
-								: "text-slate-400"
+								: "text-slate-600 dark:text-slate-400"
 						}`}
 					>
 						<div className="flex items-center gap-2">
@@ -55,16 +58,24 @@ export default function BoardList({ board, boards }: Props) {
 						</div>
 
 						<button
-							className={`opacity-0 transition-all duration-200  ${
+							className={`translate-x-0 text-slate-100 opacity-100  transition-all duration-200  dark:text-slate-700  ${
 								hover
-									? "translate-x-0 text-slate-100 opacity-100"
-									: "translate-x-[100%]"
+									? "sm:translate-x-0  sm:opacity-100"
+									: "sm:translate-x-full sm:opacity-0"
 							}`}
 							disabled={isLoading}
 							style={{ cursor: isLoading ? "not-allowed" : "pointer" }}
-							onClick={() => handleDelete(board)}
+							onClick={(e) => handleDelete(e, board)}
 						>
-							{isLoading ? <Loader /> : <TrashIcon className="h-5 w-5" />}
+							{isLoading ? (
+								<Loader />
+							) : (
+								<TrashIcon
+									className={`h-5 w-5 ${
+										isActive ? "text-slate-100" : "text-slate-500"
+									}`}
+								/>
+							)}
 						</button>
 					</div>
 				</li>

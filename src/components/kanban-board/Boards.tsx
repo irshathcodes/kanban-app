@@ -12,7 +12,7 @@ export default function Boards() {
 
 	return (
 		<div className="overflow-y-auto overflow-x-hidden">
-			<p className="my-8  pl-6 text-sm font-semibold uppercase tracking-wide text-slate-400">
+			<p className="my-8  pl-6 text-sm font-semibold uppercase tracking-wide text-slate-800 dark:text-slate-400">
 				all boards ({boards?.length || 0})
 			</p>
 			{boards && boards.length > 0 ? (
@@ -22,7 +22,7 @@ export default function Boards() {
 					})}
 				</ul>
 			) : (
-				<p className="mb-2 pl-6 text-sm text-slate-400">
+				<p className="mb-2 pl-6 text-sm text-slate-700 dark:text-slate-400">
 					start creating boards to add your tasks{" "}
 					<span className="text-base">👇</span>
 				</p>

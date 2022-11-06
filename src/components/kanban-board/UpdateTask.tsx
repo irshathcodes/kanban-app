@@ -77,10 +77,10 @@ export default function UpdateTask() {
 	}, [error]);
 
 	return (
-		<Modal className="py-8 px-8 text-slate-200">
+		<Modal className="p-8 text-slate-800 dark:text-slate-200">
 			<form onSubmit={handleSubmit}>
-				<div className="flex items-center justify-between">
-					<h1 className="mb-4 text-2xl font-semibold first-letter:uppercase">
+				<div className="mb-4 flex items-center justify-between">
+					<h1 className=" text-2xl font-semibold first-letter:uppercase">
 						{taskName}
 					</h1>
 					<XMarkIcon
@@ -88,7 +88,7 @@ export default function UpdateTask() {
 						onClick={() => navigate(-1)}
 					/>
 				</div>
-				<p className="mb-4 text-slate-400">
+				<p className="mb-4 text-slate-700 dark:text-slate-400">
 					{description ? description : "no description"}
 				</p>
 
@@ -100,7 +100,7 @@ export default function UpdateTask() {
 						<label
 							htmlFor={`${subTask}-${_id}`}
 							key={_id}
-							className={`mb-2 flex w-full cursor-pointer select-none items-center rounded bg-zinc-900 py-2 px-4 text-slate-400 ${
+							className={`mb-2 flex w-full cursor-pointer select-none items-center rounded bg-slate-100 py-2 px-4 dark:bg-zinc-900 dark:text-slate-400 ${
 								completed ? "line-through" : ""
 							} `}
 						>
@@ -126,7 +126,7 @@ export default function UpdateTask() {
 				/>
 
 				<div>
-					<Button type="submit" loader={isLoading} className="mb-2">
+					<Button type="submit" loader={isLoading} className="mb-1">
 						Update Task
 					</Button>
 

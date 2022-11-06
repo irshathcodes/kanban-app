@@ -27,7 +27,7 @@ export default function Notification({
 
 	return createPortal(
 		<div
-			className={`absolute right-0 bottom-0 m-8 flex w-fit items-center gap-2 rounded-md bg-primary-600 py-2 px-4 font-semibold text-slate-100 transition-all first-letter:uppercase ${bgColor} ${
+			className={`absolute right-0 bottom-0 z-[100] m-8 flex w-fit items-center gap-2 rounded-md bg-primary-600 py-2 px-4 font-semibold text-slate-100 transition-all first-letter:uppercase ${bgColor} ${
 				notify ? "scale-100 opacity-100" : "scale-0 opacity-0"
 			}`}
 		>

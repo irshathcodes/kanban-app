@@ -9,11 +9,14 @@ import Home from "./components/kanban-board/Home";
 import VerifyUser from "./components/auth/VerifyUser";
 import ChangePassword from "./components/auth/ChangePassword";
 import ResetPassword from "./components/auth/ResetPassword";
+import useAppContext from "./components/hooks/useAppContext";
 
 function App() {
+	const { theme } = useAppContext();
+
 	return (
 		<>
-			<div>
+			<div className={`${theme}`}>
 				<Routes>
 					<Route path="/" element={<Home />}>
 						<Route path="/:board" element={<TaskList />}>

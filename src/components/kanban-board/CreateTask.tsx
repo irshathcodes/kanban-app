@@ -65,7 +65,7 @@ export default function CreateTask() {
 	}, []);
 	return (
 		<Modal>
-			<form onSubmit={handleSubmit} className="text-slate-200">
+			<form onSubmit={handleSubmit} className="dark:text-slate-200">
 				<div className="flex items-center justify-between">
 					<h2 className="text-lg font-semibold capitalize">add new task</h2>
 					<XMarkIcon

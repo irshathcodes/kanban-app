@@ -43,15 +43,18 @@ export default function Login() {
 		);
 	};
 	return (
-		<div className="flex h-screen justify-center  bg-gray-50 pt-12 ">
-			<div className="w-96 rounded-md border border-gray-200 p-6 ">
-				<h1 className="py-2 text-center text-2xl font-bold ">
+		<div className=" flex h-screen justify-center bg-gray-50 dark:bg-neutral-900 sm:items-center ">
+			<div className="m-2 mt-12 h-fit w-96 rounded-md border p-6 dark:border-zinc-700 dark:bg-zinc-800 dark:text-slate-400 sm:mt-0 ">
+				<h1 className="py-2 text-center text-2xl font-bold dark:text-slate-200 ">
 					Sign in to your account
 				</h1>
 
 				<p className="w-full  text-center text-sm font-medium">
 					or don't have an account?{" "}
-					<Link to="/register" className="text-primary-600 underline">
+					<Link
+						to="/register"
+						className="text-primary-600 underline dark:text-primary-400"
+					>
 						sign up for free
 					</Link>
 				</p>
@@ -87,7 +90,7 @@ export default function Login() {
 					<button
 						type="button"
 						onClick={() => navigate("/change-password")}
-						className="text-sm font-medium text-primary-600 hover:underline"
+						className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-400"
 					>
 						Forgot your password?
 					</button>
@@ -97,7 +100,7 @@ export default function Login() {
 					</Button>
 				</form>
 
-				{notify && <p className="my-4 text-center text-red-600">{error}</p>}
+				{notify && <p className="my-4 text-center text-red-500">{error}</p>}
 
 				<GuestLogin />
 			</div>

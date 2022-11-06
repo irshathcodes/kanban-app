@@ -20,7 +20,7 @@ export default function Select(props: Props) {
 					<option
 						value={value}
 						key={value}
-						className={`bg-zinc-800 capitalize`}
+						className={`bg-zinc-800 capitalize `}
 					>
 						{value}
 					</option>
