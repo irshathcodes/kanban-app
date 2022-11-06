@@ -13,7 +13,15 @@ export const AppContext = createContext({} as ContextProps);
 
 export default function AppContextProvider(props: { children: ReactNode }) {
 	const [showSidebar, setShowSidebar] = useState(false);
-	const [theme, setTheme] = useState<Theme>("dark");
+	const [theme, setTheme] = useState<Theme>(() => {
+		const savedTheme = localStorage.getItem("theme");
+		if (savedTheme) {
+			if (savedTheme === "light" || savedTheme === "dark") {
+				return savedTheme;
+			}
+		}
+		return "dark";
+	});
 
 	useEffect(() => {
 		const isSystemPreferDarkMode = window.matchMedia(
