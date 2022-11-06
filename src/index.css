@@ -8,6 +8,9 @@
 	--scroll-track-color: theme("colors.zinc.700");
 	--scroll-thumb-color: theme("colors.zinc.600");
 	--scroll-thumb-hover-clr: theme("colors.zinc.500");
+	--scroll-track-color: theme("colors.zinc.700");
+	--scroll-thumb-color: theme("colors.zinc.600");
+	--scroll-thumb-hover-clr: theme("colors.zinc.500");
 }
 @supports (font-variation-settings: normal) {
 	:root {
