@@ -1,6 +1,6 @@
 import { RectangleGroupIcon } from "@heroicons/react/20/solid";
 import { TrashIcon } from "@heroicons/react/20/solid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import deleteBoard from "../../api/deleteBoard";
 import useAppContext from "../hooks/useAppContext";
@@ -34,6 +34,11 @@ export default function BoardList({ board, boards }: Props) {
 		e.stopPropagation();
 	};
 
+	useEffect(() => {
+		if (!boardFromParams && boards.length > 0) {
+			navigate(`/${boards[0]}`);
+		}
+	}, []);
 	return (
 		<NavLink to={`/${board}`}>
 			{({ isActive }) => (
