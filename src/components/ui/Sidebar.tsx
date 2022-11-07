@@ -31,7 +31,7 @@ export default function Sidebar(props: Props) {
 				} md:hidden`}
 			></div>
 			<aside
-				className={`fixed top-0 left-0 z-50 h-full w-[270px] overflow-hidden  border border-slate-100 border-r-slate-200 bg-slate-100 pr-2  transition-all duration-300 ease-out	dark:border-zinc-800 dark:border-r-gray-500 dark:bg-zinc-800  sm:h-screen md:sticky md:translate-x-0  ${
+				className={`fixed top-0 left-0 z-50 h-full w-[270px] overflow-hidden  border border-slate-100 border-r-slate-200 bg-slate-100 pr-2  transition-all duration-300 ease-out	dark:border-zinc-800 dark:border-r-zinc-600 dark:bg-zinc-800  sm:h-screen md:sticky md:translate-x-0  ${
 					showSidebar ? "translate-x-0" : "-translate-x-full"
 				}   ${className}`}
 			>
