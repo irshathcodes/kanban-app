@@ -60,10 +60,10 @@ export default function ResetPassword() {
 	}`;
 
 	return (
-		<div className="flex h-screen w-full justify-center pt-20 ">
+		<div className="flex h-screen w-full justify-center pt-20 dark:bg-neutral-900 ">
 			<form
 				onSubmit={(e) => handleSubmit(e)}
-				className="m-2 h-fit w-96 rounded-md border p-8 shadow-lg dark:border-slate-700 "
+				className="m-2 h-fit w-96 rounded-md border p-8 shadow-lg dark:border-slate-700 dark:bg-zinc-800 "
 			>
 				<h1 className="text-center  text-2xl font-semibold tracking-tighter text-slate-800 dark:text-slate-200">
 					Enter your new password
