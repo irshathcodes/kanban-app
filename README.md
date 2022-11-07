@@ -3,12 +3,12 @@
 
 A simple task manager app to keep track of your day-to-day tasks and complete them.
 
-
+Link to production site: [mykanbanapp.vercel.app](https://mykanbanapp.vercel.app/)
 
 
 ## Screenshots
 
-![App Screenshot](./src/assets/kanbanapp-screenshot.png)
+[![App Screenshot](./src/assets/kanbanapp-screenshot.png)](https://mykanbanapp.vercel.app/)
 
 
 ## Tech Stack
