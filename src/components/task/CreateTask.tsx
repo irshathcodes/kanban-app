@@ -1,13 +1,11 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { FormEvent, useRef, useState } from "react";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Input, Label, Button, Select, Modal } from "../ui/Index";
-import { CreateTaskReq, CreateSubTask } from "../../models/Todos";
-import createTask from "../../api/createTask";
-import SubTaskInput from "./SubTaskInput";
-import useMutateTask from "../hooks/useMutateTask";
-import { useParams } from "react-router-dom";
-import useNotify from "../hooks/useNotify";
+import { Input, Label, Button, Select, Modal } from "@/components/ui/Index";
+import { CreateTaskRequest, CreateSubTaskRequest } from "@/models/Tasks";
+import createTask from "@/api/task/createTask";
+import SubTaskInput from "@/components/task/SubTaskInput";
+import { useNotify, useMutateTask, useFocus } from "@/hooks/Index";
 
 export default function CreateTask() {
 	const navigate = useNavigate();
@@ -20,49 +18,44 @@ export default function CreateTask() {
 
 	const { mutate, isLoading, isError } = useMutateTask(createTask);
 
-	const [subTasks, setsubTasks] = useState<CreateSubTask[]>([
+	const [subTasks, setsubTasks] = useState<CreateSubTaskRequest[]>([
 		{ subTask: "" },
 		{ subTask: "" },
 	]);
-
-	const [data, setData] = useState<CreateTaskReq>({
+	const [data, setData] = useState<CreateTaskRequest>({
 		todoName: "",
 		description: "",
 		kanbanBoard: "",
 	});
+
 	const [error, setError] = useState("");
 	const titleRef = useRef<HTMLInputElement>(null);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
-
-		const createTask = {} as CreateTaskReq;
+		const createTask = {} as CreateTaskRequest;
 		if (board) {
 			createTask.kanbanBoard = board;
 		}
-
 		createTask.todoName = data.todoName.trim();
 
 		const enteredSubTasks = subTasks.filter(
 			(item) => item.subTask.trim().length > 0
 		);
-
 		if (enteredSubTasks.length === 0) {
 			setError("please enter atleast one subtask to create a task");
 			showNotify();
 			return;
 		}
-
 		createTask.subTasks = enteredSubTasks;
+
 		if (data.description?.trim())
 			createTask.description = data.description.trim();
 
 		mutate(createTask);
 	};
 
-	useEffect(() => {
-		titleRef.current?.focus();
-	}, []);
+	useFocus(titleRef);
 	return (
 		<Modal>
 			<form onSubmit={handleSubmit} className="dark:text-slate-200">
@@ -96,7 +89,7 @@ export default function CreateTask() {
 				<SubTaskInput subTasks={subTasks} setsubTasks={setsubTasks} />
 
 				<Button
-					className="!my-0 mb-2 w-fit !bg-transparent px-4 text-sm text-slate-300"
+					className="!my-0 mb-2 w-fit !bg-transparent px-4 text-sm text-slate-800 dark:text-slate-300"
 					onClick={() => setsubTasks([...subTasks, { subTask: "" }])}
 				>
 					Add more tasks

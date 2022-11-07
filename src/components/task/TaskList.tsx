@@ -1,11 +1,9 @@
-import { Navbar } from "../ui/Index";
-import Task from "./Task";
 import { useQuery } from "@tanstack/react-query";
-import getAllTasks from "../../api/getAllTasks";
 import { v4 as getId } from "uuid";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
-import { getAllStatus } from "../../helpers/todo-data";
-import Boards from "./Boards";
+import { Outlet, useParams } from "react-router-dom";
+import Task from "@/components/task/Task";
+import getAllTasks from "@/api/task/getAllTasks";
+import { getAllStatus } from "@/helpers/get-status";
 
 export default function TaskList() {
 	const { board } = useParams();
@@ -17,7 +15,6 @@ export default function TaskList() {
 			staleTime: Infinity,
 		}
 	);
-
 	const allStatus = getAllStatus(tasks);
 
 	return (

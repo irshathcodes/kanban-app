@@ -1,8 +1,8 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import Todos, { SubTasks } from "../../models/Todos";
+import { useNavigate, useParams } from "react-router-dom";
+import TaskType from "@/models/Tasks";
 
 interface Props {
-	task: Todos;
+	task: TaskType;
 	allStatus: string[];
 }
 

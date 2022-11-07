@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import getBoards from "../../api/getBoards";
+import getBoards from "@/api/board/getBoards";
 import { v4 as getId } from "uuid";
-import BoardList from "./BoardList";
-import CreateBoard from "./CreateBoard";
+import BoardList from "@/components/board/BoardList";
+import CreateBoard from "@/components/board/CreateBoard";
 
 export default function Boards() {
 	const { data: boards } = useQuery(["fetch-boards"], getBoards, {

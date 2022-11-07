@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
-import createBoard from "../../../api/createBoard";
-import { CreateBoard, BoardList } from "../../../models/Todos";
+import createBoard from "@/api/board/createBoard";
+import { BoardList } from "@/models/Boards";
 
 export default function useAddBoard() {
 	const queryClient = useQueryClient();

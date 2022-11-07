@@ -1,11 +1,9 @@
 import { useState, useRef, FormEvent } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { useFocus, useNotify } from "../hooks/Index";
-import Button from "../ui/Button";
-import Notification from "../ui/Notification";
-import changePassword from "../../api/auth/changePassword";
-import resetPassword from "../../api/auth/resetPassword";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useFocus, useNotify } from "@/hooks/Index";
+import { Button, Notification } from "@/components/ui/Index";
+import resetPassword from "@/api/auth/resetPassword";
 import axios from "axios";
 
 export default function ResetPassword() {
@@ -55,19 +53,22 @@ export default function ResetPassword() {
 
 	useFocus(inputRef);
 
+	const labelStyles =
+		"my-6  block text-left text-slate-700 dark:text-slate-400";
+	const inputStyles = `mt-2  block w-full   rounded-md bg-transparent font-medium text-slate-800  dark:text-slate-300 ${
+		error ? "focus:border-red-500" : ""
+	}`;
+
 	return (
 		<div className="flex h-screen w-full justify-center pt-20 ">
 			<form
 				onSubmit={(e) => handleSubmit(e)}
-				className="m-2 h-fit w-96 rounded-md border border-slate-700 p-8 shadow-lg "
+				className="m-2 h-fit w-96 rounded-md border p-8 shadow-lg dark:border-slate-700 "
 			>
-				<h1 className="text-center  text-2xl font-semibold tracking-tighter text-slate-200">
+				<h1 className="text-center  text-2xl font-semibold tracking-tighter text-slate-800 dark:text-slate-200">
 					Enter your new password
 				</h1>
-				<label
-					htmlFor="password"
-					className="my-6  block text-left text-slate-400"
-				>
+				<label htmlFor="password" className={labelStyles}>
 					new password
 					<input
 						type="password"
@@ -78,15 +79,10 @@ export default function ResetPassword() {
 						minLength={8}
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
-						className={`mt-2  block w-full   rounded-md bg-transparent font-medium text-slate-300 focus:ring-0 ${
-							error ? "focus:border-red-500" : ""
-						}`}
+						className={inputStyles}
 					/>
 				</label>
-				<label
-					htmlFor="confirmPassword"
-					className="my-6  block text-left text-slate-400"
-				>
+				<label htmlFor="confirmPassword" className={labelStyles}>
 					confirm password
 					<input
 						type="password"
@@ -96,9 +92,7 @@ export default function ResetPassword() {
 						minLength={8}
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
-						className={`mt-2  block w-full   rounded-md bg-transparent font-medium text-slate-300 focus:ring-0 ${
-							error ? "focus:border-red-500" : ""
-						}`}
+						className={inputStyles}
 					/>
 				</label>
 				{error || notify ? (

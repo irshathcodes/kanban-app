@@ -1,10 +1,9 @@
-import { useState, useRef, useEffect, FormEvent } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Link, useNavigate } from "react-router-dom";
-import { useNotify, useFocus } from "../hooks/Index";
-import Button from "../ui/Button";
-import Notification from "../ui/Notification";
-import changePassword from "../../api/auth/changePassword";
+import { useState, useRef, FormEvent } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+import { useNotify, useFocus } from "@/hooks/Index";
+import { Button, Notification } from "@/components/ui/Index";
+import changePassword from "@/api/auth/changePassword";
 
 export default function ChangePassword() {
 	const [email, setEmail] = useState("");

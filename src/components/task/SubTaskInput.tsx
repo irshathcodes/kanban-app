@@ -1,11 +1,11 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ChangeEvent } from "react";
-import { CreateSubTask } from "../../models/Todos";
-import Input from "../ui/Input";
+import { CreateSubTaskRequest } from "@/models/Tasks";
+import Input from "@/components/ui/Input";
 
 interface Props {
-	subTasks: CreateSubTask[];
-	setsubTasks: React.Dispatch<React.SetStateAction<CreateSubTask[]>>;
+	subTasks: CreateSubTaskRequest[];
+	setsubTasks: React.Dispatch<React.SetStateAction<CreateSubTaskRequest[]>>;
 }
 
 const subTaskPlaceholders = ["eg: make coffee", "eg: drink coffee and smile"];

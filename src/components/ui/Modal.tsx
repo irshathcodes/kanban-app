@@ -1,6 +1,6 @@
 import { useEffect, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import useEscape from "../hooks/useEscape";
+import useEscape from "@/hooks/useEscape";
 
 export default function Modal({
 	children,

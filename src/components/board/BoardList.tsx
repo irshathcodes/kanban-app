@@ -1,10 +1,8 @@
-import { RectangleGroupIcon } from "@heroicons/react/20/solid";
-import { TrashIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
+import { RectangleGroupIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import useAppContext from "../hooks/useAppContext";
-import { Loader } from "../ui/Index";
-import useDeleteBoard from "../hooks/query-hooks/useDeleteBoard";
+import { Loader } from "@/components/ui/Index";
+import { useDeleteBoard, useAppContext } from "@/hooks/Index";
 
 interface Props {
 	board: string;
@@ -53,7 +51,7 @@ export default function BoardList({ board, boards }: Props) {
 						</div>
 
 						<button
-							className={`translate-x-0 text-slate-100 opacity-100  transition-all duration-200  dark:text-slate-700  ${
+							className={`translate-x-0 text-slate-100  opacity-100 transition-all  duration-200 dark:text-slate-700  ${
 								hover
 									? "sm:translate-x-0  sm:opacity-100"
 									: "sm:translate-x-full sm:opacity-0"

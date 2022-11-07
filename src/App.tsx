@@ -1,15 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
-import NotFound from "./components/NotFound";
-import TaskList from "./components/kanban-board/TaskList";
-import CreateTask from "./components/kanban-board/CreateTask";
-import UpdateTask from "./components/kanban-board/UpdateTask";
-import Home from "./components/kanban-board/Home";
-import VerifyUser from "./components/auth/VerifyUser";
-import ChangePassword from "./components/auth/ChangePassword";
-import ResetPassword from "./components/auth/ResetPassword";
-import useAppContext from "./components/hooks/useAppContext";
+import Login from "@/components/auth/Login";
+import Register from "@/components/auth/Register";
+import NotFound from "@/components/NotFound";
+import TaskList from "@/components/task/TaskList";
+import CreateTask from "@/components/task/CreateTask";
+import UpdateTask from "@/components/task/UpdateTask";
+import Home from "@/components/Home";
+import VerifyUser from "@/components/auth/VerifyUser";
+import ChangePassword from "@/components/auth/ChangePassword";
+import ResetPassword from "@/components/auth/ResetPassword";
+import useAppContext from "@/hooks/useAppContext";
 
 function App() {
 	const { theme } = useAppContext();

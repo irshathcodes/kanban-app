@@ -1,7 +1,7 @@
 import { PlusIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Link, useParams } from "react-router-dom";
-import KanbanLogo from "../../assets/KanbanLogo";
-import useAppContext from "../hooks/useAppContext";
+import KanbanLogo from "@/assets/KanbanLogo";
+import useAppContext from "@/hooks/useAppContext";
 
 export default function Navbar() {
 	const { board } = useParams();

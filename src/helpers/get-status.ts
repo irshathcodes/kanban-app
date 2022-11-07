@@ -1,6 +1,6 @@
-import Todos from "../models/Todos";
+import Task from "@/models/Tasks";
 
-export const getAllStatus = (tasks: Todos[] | undefined) => {
+export const getAllStatus = (tasks: Task[] | undefined) => {
 	const allStatus = tasks?.map((todo) => todo.status);
 	const uniqueStatus = [...new Set(allStatus)];
 	const status = ["todo", "doing", "done"];

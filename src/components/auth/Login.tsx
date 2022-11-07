@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import Button from "../ui/Button";
+import Button from "@/components/ui/Button";
 import axios from "axios";
-import login from "../../api/auth/login";
-import useNotify from "../hooks/useNotify";
-import GuestLogin from "./GuestLogin";
+import login from "@/api/auth/login";
+import useNotify from "@/hooks/useNotify";
+import GuestLogin from "@/components/auth/GuestLogin";
 
 export default function Login() {
 	const queryClient = useQueryClient();

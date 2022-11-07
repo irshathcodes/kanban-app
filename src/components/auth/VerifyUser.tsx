@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect, FormEvent } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import useNotify from "../hooks/useNotify";
-import Button from "../ui/Button";
-import verifyUser from "../../api/auth/verifyUser";
-import Notification from "../ui/Notification";
+import useNotify from "@/hooks/useNotify";
+import { Button, Notification } from "@/components/ui/Index";
+import verifyUser from "@/api/auth/verifyUser";
 
 export default function VerifyUser() {
 	const [otp, setOtp] = useState("");

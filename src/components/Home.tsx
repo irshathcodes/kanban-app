@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import { Navbar, Sidebar } from "../ui/Index";
-import Boards from "./Boards";
-import User from "./user/User";
+import { Navbar, Sidebar } from "@/components/ui/Index";
+import Boards from "@/components/board/Boards";
+import User from "@/components/user/User";
 
 export default function Home() {
 	return (

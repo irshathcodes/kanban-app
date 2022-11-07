@@ -1,4 +1,4 @@
-import request from "../../helpers/axios-instance";
+import request from "@/helpers/axios-instance";
 
 interface data {
 	name: string;

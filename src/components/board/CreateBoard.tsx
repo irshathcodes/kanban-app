@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect, FormEvent } from "react";
 import { CheckIcon, PlusIcon } from "@heroicons/react/20/solid";
-import useAddBoard from "../hooks/query-hooks/useAddBoard";
-import useNotify from "../hooks/useNotify";
-import { Notification } from "../ui/Index";
+import useAddBoard from "@/hooks/query-hooks/useAddBoard";
+import useNotify from "@/hooks/useNotify";
+import { Notification } from "@/components/ui/Index";
 import axios from "axios";
 
 export default function CreateBoard() {

@@ -1,14 +1,14 @@
 import { FormEvent, useEffect, useState } from "react";
-import { Button, Label, Modal, Select } from "../ui/Index";
-import { useLocation, useNavigate, useNavigationType } from "react-router-dom";
-import Todos from "../../models/Todos";
-import updateTask from "../../api/updateTask";
-import useMutateTask from "../hooks/useMutateTask";
-import deleteTask from "../../api/deleteTask";
+import { Button, Label, Modal, Select } from "@/components/ui/Index";
+import { useLocation, useNavigate } from "react-router-dom";
+import Task from "@/models/Tasks";
+import updateTask from "@/api/task/updateTask";
+import { useMutateTask, useNotify } from "@/hooks/Index";
+import deleteTask from "@/api/task/deleteTask";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 interface State {
-	task: Todos;
+	task: Task;
 	allStatus: string[];
 }
 
@@ -21,23 +21,21 @@ export default function UpdateTask() {
 		description,
 		status: currentStatus,
 		subTasks: subTasksList,
-		kanbanBoard: board,
 	} = task;
 
 	const [subTasks, setSubTasks] = useState(subTasksList);
 	const [status, setStatus] = useState(currentStatus);
 	const [error, setError] = useState("");
+	const { notify, showNotify } = useNotify();
 
 	const navigate = useNavigate();
 
 	const { mutate, isLoading, isError } = useMutateTask(updateTask);
-	const {
-		mutate: deleteMutate,
-		isLoading: isDeleting,
-		isError: isDeleteError,
-	} = useMutateTask(deleteTask);
+	const { mutate: deleteMutate, isLoading: isDeleting } =
+		useMutateTask(deleteTask);
 
 	if (isError) {
+		showNotify();
 		setError("something went wrong, please try again later");
 	}
 
@@ -65,16 +63,6 @@ export default function UpdateTask() {
 		} else if (completedTask !== subTasks.length) setStatus("doing");
 		else if (completedTask === subTasks.length) setStatus("done");
 	}, [completedTask]);
-
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setError("");
-		}, 3000);
-
-		return () => {
-			clearTimeout(timeout);
-		};
-	}, [error]);
 
 	return (
 		<Modal className="p-8 text-slate-800 dark:text-slate-200">
@@ -139,7 +127,7 @@ export default function UpdateTask() {
 					</Button>
 				</div>
 			</form>
-			<p className="text-center font-medium text-red-500">{error && error}</p>
+			<p className="text-center font-medium text-red-500">{notify && error}</p>
 		</Modal>
 	);
 }

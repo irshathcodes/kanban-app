@@ -1,5 +1,5 @@
 import React from "react";
-import kanbanLogo from "../assets/kanban-logo.png";
+import kanbanLogo from "@/assets/kanban-logo.png";
 
 export default function KanbanLogo(
 	props: React.ImgHTMLAttributes<HTMLImageElement>

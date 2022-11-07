@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import guestLogin from "../../api/auth/guestLogin";
+import guestLogin from "@/api/auth/guestLogin";
 
 export default function GuestLogin() {
 	const navigate = useNavigate();

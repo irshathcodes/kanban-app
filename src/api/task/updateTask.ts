@@ -1,5 +1,5 @@
-import request from "../helpers/axios-instance";
-import { UpdateTaskRequest } from "../models/Todos";
+import request from "@/helpers/axios-instance";
+import { UpdateTaskRequest } from "@/models/Tasks";
 
 export default async function updateTask({
 	id,

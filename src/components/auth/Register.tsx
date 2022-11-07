@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button } from "../ui/Index";
+import { Button } from "@/components/ui/Index";
 import axios from "axios";
-import useNotify from "../hooks/useNotify";
-import register from "../../api/auth/register";
-import GuestLogin from "./GuestLogin";
+import useNotify from "@/hooks/useNotify";
+import register from "@/api/auth/register";
+import GuestLogin from "@/components/auth/GuestLogin";
 
 export default function Register() {
 	const { mutate: mutateLogin, data: res, isLoading } = useMutation(register);

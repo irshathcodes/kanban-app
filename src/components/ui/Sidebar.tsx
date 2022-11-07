@@ -1,6 +1,6 @@
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
-import KanbanLogo from "../../assets/KanbanLogo";
-import useAppContext from "../hooks/useAppContext";
+import KanbanLogo from "@/assets/KanbanLogo";
+import useAppContext from "@/hooks/useAppContext";
 
 interface Props {
 	className?: string;
