@@ -89,7 +89,7 @@ export default function CreateTask() {
 				<SubTaskInput subTasks={subTasks} setsubTasks={setsubTasks} />
 
 				<Button
-					className="!my-0 mb-2 w-fit !bg-transparent px-4 text-sm text-slate-800 dark:text-slate-300"
+					className="!my-0 mb-2 w-fit !bg-transparent px-4 text-sm !text-slate-800 dark:text-slate-300"
 					onClick={() => setsubTasks([...subTasks, { subTask: "" }])}
 				>
 					Add more tasks
