@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { v4 as getId } from "uuid";
 import { Outlet, useParams } from "react-router-dom";
@@ -7,7 +8,7 @@ import { getAllStatus } from "@/helpers/get-status";
 
 export default function TaskList() {
 	const { board } = useParams();
-	const { data: tasks, isLoading } = useQuery(
+	const { data: tasks } = useQuery(
 		["fetch-tasks", board],
 		() => getAllTasks(board),
 		{
@@ -15,7 +16,10 @@ export default function TaskList() {
 			staleTime: Infinity,
 		}
 	);
-	const allStatus = getAllStatus(tasks);
+
+	const allStatus = useMemo(() => {
+		return getAllStatus(tasks);
+	}, [tasks]);
 
 	return (
 		<>
@@ -29,8 +33,9 @@ export default function TaskList() {
 				<div className="flex  gap-6 p-6">
 					{allStatus?.map((status, i) => {
 						const filteredTask = tasks?.filter(
-							(todo) => todo.status === status
+							(task) => task.status === status
 						);
+
 						return (
 							<section key={getId()} className="w-60">
 								<h3 className="flex  items-center pl-1 text-sm font-semibold uppercase tracking-wide text-slate-800 dark:text-slate-400">
