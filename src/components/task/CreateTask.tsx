@@ -88,12 +88,12 @@ export default function CreateTask() {
 				<Label name="subtasks" />
 				<SubTaskInput subTasks={subTasks} setsubTasks={setsubTasks} />
 
-				<Button
-					className="!my-0 mb-2 w-fit !bg-transparent px-4 text-sm !text-slate-800 dark:text-slate-300"
+				<button
+					className="mb-2 w-fit px-4 text-sm text-slate-800 dark:text-slate-300"
 					onClick={() => setsubTasks([...subTasks, { subTask: "" }])}
 				>
 					Add more tasks
-				</Button>
+				</button>
 
 				<Label name="status" />
 				<Select values={status} disabled={true} styles="cursor-not-allowed" />
