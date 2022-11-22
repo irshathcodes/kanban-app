@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-	baseURL: "https://kanban-board-api.up.railway.app/api",
+	baseURL: "https://kanban-api-edr9.onrender.com/api",
 	withCredentials: true,
 });
 
