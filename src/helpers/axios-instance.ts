@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-	baseURL: "https://kanban-api-edr9.onrender.com/api",
+	baseURL: "https://kanban-api.cyclic.app/api",
 	withCredentials: true,
 });
 
