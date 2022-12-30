@@ -9,7 +9,7 @@ instance.interceptors.response.use(
 	(res) => res,
 	(err) => {
 		if (axios.isAxiosError(err)) {
-			if (err.response?.status === 401) {
+			if (err.response?.status === 401 || err.message === "Network Error") {
 				window.location.href = "/login";
 			}
 		}
