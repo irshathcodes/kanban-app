@@ -1,29 +1,28 @@
+# Create T3 App
 
-# Kanban App
+This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-A simple task manager app to keep track of your day-to-day tasks and complete them.
+## What's next? How do I make an app with this?
 
-Link to production site: [mykanbanapp.vercel.app](https://mykanbanapp.vercel.app/)
+We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
 
+If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
-## Screenshots
+- [Next.js](https://nextjs.org)
+- [NextAuth.js](https://next-auth.js.org)
+- [Prisma](https://prisma.io)
+- [Tailwind CSS](https://tailwindcss.com)
+- [tRPC](https://trpc.io)
 
-[![App Screenshot](./src/assets/kanbanapp-screenshot.png)](https://mykanbanapp.vercel.app/)
+## Learn More
 
+To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
 
-## Tech Stack
+- [Documentation](https://create.t3.gg/)
+- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
-**Client:** React, React Query, TailwindCSS
+You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
 
-[**Server:**](https://github.com/irshathcodes/kanban-api) Node, Express, MongoDB
+## How do I deploy this?
 
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
-
-## Feedback
-
-If you have any feedback/suggestions, please reach out to me at [@irshathcodes](https://twitter.com/irshathcodes)
-
+Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
