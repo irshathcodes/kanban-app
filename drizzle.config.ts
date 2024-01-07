@@ -8,5 +8,5 @@ export default {
   dbCredentials: {
     connectionString: env.DATABASE_URL,
   },
-  tablesFilter: ["nextjs-boilerplate_*"],
+  tablesFilter: ["kanban_app_*"],
 } satisfies Config;
