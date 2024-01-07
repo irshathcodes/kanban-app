@@ -35,8 +35,9 @@ export default function Home() {
 
 function CrudShowcase() {
   const { data: session } = useSession();
-  if (!session?.user) return null;
   const { data: latestPost } = api.post.getLatest.useQuery();
+
+  if (!session?.user) return null;
 
   return (
     <div className="w-full max-w-xs">
