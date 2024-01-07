@@ -91,3 +91,22 @@ export const verificationTokens = mysqlTable(
     compoundKey: primaryKey(vt.identifier, vt.token),
   }),
 );
+
+export const boards = mysqlTable("board", {
+  board_id: int("board_id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  user_id: varchar("user_id", { length: 255 }),
+});
+
+export const columns = mysqlTable("column", {
+  column_id: int("column_id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  board_id: int("board_id"),
+});
+
+export const tasks = mysqlTable("task", {
+  task_id: int("task_id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  column_id: int("column_id"),
+  description: text("description"),
+});
