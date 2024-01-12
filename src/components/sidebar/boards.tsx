@@ -9,31 +9,17 @@ import { Input } from "@/components/ui/input";
 import { flushSync } from "react-dom";
 import { api } from "@/trpc/react";
 
-const boards = [
-  {
-    board_id: 1,
-    name: "Platform launch",
-  },
-  {
-    board_id: 2,
-    name: "Marketing Plan",
-  },
-  {
-    board_id: 3,
-    name: "Roadmap",
-  },
-];
 export function Boards() {
   const pathname = usePathname();
   const { data: boards, isLoading } = api.board.getBoards.useQuery();
 
   return (
-    <div className="animate-out fade-out">
+    <div className="flex h-full flex-col animate-out fade-out">
       <h2 className="px-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
         all boards (8)
       </h2>
 
-      <ul className="mt-5 space-y-2">
+      <ul className="mt-5 h-full flex-1 space-y-2 overflow-auto">
         {(boards || []).map((board) => {
           const link = `/${board.name}`;
           return (
@@ -57,7 +43,9 @@ export function Boards() {
         })}
       </ul>
 
-      <CreateBoard />
+      <div className="flex-shrink-0">
+        <CreateBoard />
+      </div>
     </div>
   );
 }
@@ -81,7 +69,6 @@ function CreateBoard() {
     }
   };
 
-  const handleCreate = () => {};
   return (
     <div className="mt-3">
       <div
@@ -119,12 +106,13 @@ function CreateBoard() {
             >
               Cancel
             </Button>
-            <Button disabled={isLoading} onClick={handleCreate} size="sm">
+            <Button type="submit" disabled={isLoading} size="sm">
               Create
             </Button>
           </div>
         </form>
       </div>
+
       <Button
         className={cn(
           "gap-1 transition-all hover:no-underline hover:opacity-[0.85]",
