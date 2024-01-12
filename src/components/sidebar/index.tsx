@@ -1,3 +1,4 @@
+"use client";
 import { KanbanSquare, PanelRightOpen } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { TRPCReactProvider } from "@/trpc/react";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
+import Sidebar from "@/components/sidebar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,7 +29,10 @@ export default function RootLayout({
       <body className={cn("font-sans", inter.variable, "min-h-screen")}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TRPCReactProvider cookies={cookies().toString()}>
-            {children}
+            <div className="grid grid-cols-[270px_minmax(0,1fr)] gap-6">
+              <Sidebar />
+              {children}
+            </div>
           </TRPCReactProvider>
         </ThemeProvider>
       </body>

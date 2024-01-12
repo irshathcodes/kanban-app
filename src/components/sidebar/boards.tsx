@@ -21,7 +21,7 @@ export function Boards() {
 
       <ul className="mt-5 h-full flex-1 space-y-2 overflow-auto">
         {(boards || []).map((board) => {
-          const link = `/${board.name}`;
+          const link = `/boards/${board.board_id}`;
           return (
             <li key={board.board_id}>
               <Link
@@ -29,9 +29,8 @@ export function Boards() {
                 className={cn(
                   "flex w-11/12 items-center gap-2.5 rounded-r-full px-4 py-2.5",
                   {
-                    "bg-primary text-primary-foreground": board.board_id === 1,
-                    "text-muted-foreground hover:bg-muted":
-                      board.board_id !== 1,
+                    "bg-primary text-primary-foreground": pathname === link,
+                    "text-muted-foreground hover:bg-muted": pathname !== link,
                   },
                 )}
               >
