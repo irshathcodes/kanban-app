@@ -16,7 +16,7 @@ export function Boards() {
   return (
     <div className="flex h-full flex-col animate-out fade-out">
       <h2 className="px-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-        all boards (8)
+        all boards ({boards?.length ?? 0})
       </h2>
 
       <ul className="mt-5 h-full flex-1 space-y-2 overflow-auto">
@@ -70,67 +70,55 @@ function CreateBoard() {
 
   return (
     <div className="mt-3">
-      <div
-        className={cn(
-          "grid transition-all duration-100",
-          showCreateInput
-            ? "grid-rows-[1fr] opacity-100"
-            : "grid-rows-[0fr] opacity-0",
-        )}
-      >
-        <form
-          onSubmit={handleSubmit}
-          className={cn("overflow-hidden px-4 pt-2")}
-        >
-          <Input
-            required
-            ref={inputRef}
-            type="text"
-            id="board_name"
-            name="board_name"
-            onKeyDown={(e) => {
-              if (e.key === "Escape") {
-                setShowCreateInput(false);
-              }
-            }}
-            disabled={isLoading}
-          />
-          <div className="ml-auto mt-4 w-fit space-x-2">
-            <Button
-              size="sm"
-              onClick={() => setShowCreateInput(false)}
-              variant="ghost"
-              type="button"
+      {showCreateInput && (
+        <div className={cn("animate-in fade-in zoom-in")}>
+          <form onSubmit={handleSubmit} className={cn("px-4 pt-2")}>
+            <Input
+              required
+              ref={inputRef}
+              type="text"
+              id="board_name"
+              name="board_name"
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  setShowCreateInput(false);
+                }
+              }}
               disabled={isLoading}
-            >
-              Cancel
-            </Button>
-            <Button type="submit" disabled={isLoading} size="sm">
-              Create
-            </Button>
-          </div>
-        </form>
-      </div>
+            />
+            <div className="ml-auto mt-4 w-fit space-x-2">
+              <Button
+                size="sm"
+                onClick={() => setShowCreateInput(false)}
+                variant="ghost"
+                type="button"
+                disabled={isLoading}
+              >
+                Cancel
+              </Button>
+              <Button type="submit" disabled={isLoading} size="sm">
+                Create
+              </Button>
+            </div>
+          </form>
+        </div>
+      )}
 
-      <Button
-        className={cn(
-          "gap-1 transition-all hover:no-underline hover:opacity-[0.85]",
-          {
-            "scale-100 opacity-100": !showCreateInput,
-            "scale-0 opacity-0": showCreateInput,
-          },
-        )}
-        variant="link"
-        onClick={() => {
-          flushSync(() => {
-            setShowCreateInput(true);
-          });
-          inputRef.current?.focus();
-        }}
-      >
-        <Plus size={14} />
-        Create New Board
-      </Button>
+      {!showCreateInput && (
+        <Button
+          className="gap-1 animate-in fade-in zoom-in hover:no-underline hover:opacity-[0.85]"
+          variant="link"
+          onClick={() => {
+            flushSync(() => {
+              setShowCreateInput(true);
+            });
+            inputRef.current?.focus();
+          }}
+        >
+          <Plus size={14} />
+          Create New Board
+        </Button>
+      )}
     </div>
   );
 }

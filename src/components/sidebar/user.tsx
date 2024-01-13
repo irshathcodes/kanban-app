@@ -3,29 +3,20 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
   DropdownMenuSubTrigger,
   DropdownMenuSub,
   DropdownMenuPortal,
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
-import {
-  Laptop2,
-  Moon,
-  MoreHorizontal,
-  Palette,
-  Sun,
-  SunMoon,
-} from "lucide-react";
+import { Laptop2, Moon, MoreHorizontal, Palette, Sun } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useTheme } from "next-themes";
 
 export function User() {
   const { data } = useSession();
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   return (
     <div className="flex justify-between gap-2 rounded-t-lg bg-muted px-4 py-3">
       <div className="flex items-center gap-2">
@@ -52,18 +43,27 @@ export function User() {
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent className="w-36">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
+                <DropdownMenuCheckboxItem
+                  checked={theme === "light"}
+                  onClick={() => setTheme("light")}
+                >
                   <Sun className="mr-2 h-4 w-4" />
                   Light
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem
+                  checked={theme === "dark"}
+                  onClick={() => setTheme("dark")}
+                >
                   <Moon className="mr-2 h-4 w-4" />
                   Dark
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem
+                  checked={theme === "system"}
+                  onClick={() => setTheme("system")}
+                >
                   <Laptop2 className="mr-2 h-4 w-4" />
                   System
-                </DropdownMenuItem>
+                </DropdownMenuCheckboxItem>
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
           </DropdownMenuSub>
