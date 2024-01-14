@@ -4,14 +4,14 @@ import { LayoutDashboard, Plus } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { FormEvent, useRef, useState } from "react";
+import { type FormEvent, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { flushSync } from "react-dom";
 import { api } from "@/trpc/react";
 
 export function Boards() {
   const pathname = usePathname();
-  const { data: boards, isLoading } = api.board.getBoards.useQuery();
+  const { data: boards } = api.board.getBoards.useQuery();
 
   return (
     <div className="flex h-full flex-col animate-out fade-out">
@@ -20,7 +20,7 @@ export function Boards() {
       </h2>
 
       <ul className="mt-5 h-full flex-1 space-y-2 overflow-auto">
-        {(boards || []).map((board) => {
+        {(boards ?? []).map((board) => {
           const link = `/boards/${board.board_id}`;
           return (
             <li key={board.board_id}>
@@ -59,9 +59,9 @@ function CreateBoard() {
     e.preventDefault();
     if (inputRef.current) {
       mutate(inputRef.current.value, {
-        onSuccess() {
+        async onSuccess() {
           inputRef.current!.value = "";
-          utils.board.getBoards.invalidate();
+          await utils.board.getBoards.invalidate();
           setShowCreateInput(false);
         },
       });
