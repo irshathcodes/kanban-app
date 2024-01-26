@@ -15,8 +15,8 @@ export default function Board() {
   }
 
   return (
-    <div className="flex h-full flex-col">
-      <header className="h-[60px] shrink-0 border-b bg-card p-4 text-lg font-semibold tracking-tight">
+    <div className="flex h-full flex-1">
+      <header className="h-[60px] w-full shrink-0 border-b bg-card p-4 text-lg font-semibold tracking-tight">
         {boardName}
       </header>
     </div>

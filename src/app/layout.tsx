@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className={cn("min-h-screen font-sans", fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TRPCReactProvider cookies={cookies().toString()}>
-            <div className="grid grid-cols-[270px_minmax(0,1fr)]">
+            <div className="flex">
               <Sidebar />
               {children}
             </div>
