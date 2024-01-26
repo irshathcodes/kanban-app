@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   ArrowLeftFromLine,
@@ -10,6 +10,12 @@ import Link from "next/link";
 import { Boards } from "@/components/sidebar/boards";
 import { User } from "@/components/sidebar/user";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(true);
@@ -44,14 +50,16 @@ export default function Sidebar() {
             <h1 className="text-2xl font-bold">kanban</h1>
           </Link>
 
-          <Button
-            onClick={() => setOpen(false)}
-            className={cn("mr-2")}
-            size="icon"
-            variant="secondary"
-          >
-            <ArrowLeftFromLine size={20} />
-          </Button>
+          <SidebarTooltip open={open}>
+            <Button
+              onClick={() => setOpen(false)}
+              className={cn("mr-2")}
+              size="icon"
+              variant="secondary"
+            >
+              <ArrowLeftFromLine size={20} />
+            </Button>
+          </SidebarTooltip>
         </div>
 
         <div className="mt-12 min-h-0 flex-1">
@@ -64,11 +72,27 @@ export default function Sidebar() {
       </aside>
       {!open && (
         <div className="flex h-[60px] items-center border-b bg-card">
-          <Button onClick={() => setOpen(true)} size="icon" variant="ghost">
-            <ArrowRightFromLine size={20} />
-          </Button>
+          <SidebarTooltip open={open}>
+            <Button onClick={() => setOpen(true)} size="icon" variant="ghost">
+              <ArrowRightFromLine size={20} />
+            </Button>
+          </SidebarTooltip>
         </div>
       )}
     </>
+  );
+}
+
+function SidebarTooltip(props: React.PropsWithChildren<{ open: boolean }>) {
+  const content = props.open ? "Collapse sidebar" : "Open sidebar";
+  return (
+    <TooltipProvider delayDuration={500}>
+      <Tooltip>
+        <TooltipTrigger asChild>{props.children}</TooltipTrigger>
+        <TooltipContent>
+          {content} <span className="border bg-muted px-1.5 py-0.5">{`[`}</span>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }
