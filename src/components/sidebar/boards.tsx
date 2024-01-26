@@ -14,12 +14,12 @@ export function Boards() {
   const { data: boards } = api.board.getBoards.useQuery();
 
   return (
-    <div className="flex h-full flex-col animate-out fade-out">
+    <div className="flex h-full flex-col">
       <h2 className="px-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
         all boards ({boards?.length ?? 0})
       </h2>
 
-      <ul className="mt-5 h-full flex-1 space-y-2 overflow-auto">
+      <ul className="mt-5 h-fit flex-1 space-y-2 overflow-auto">
         {(boards ?? []).map((board) => {
           const link = `/boards/${board.board_id}`;
           return (
@@ -42,7 +42,7 @@ export function Boards() {
         })}
       </ul>
 
-      <div className="flex-shrink-0">
+      <div className="mt-3">
         <CreateBoard />
       </div>
     </div>
@@ -60,8 +60,8 @@ function CreateBoard() {
     if (inputRef.current) {
       mutate(inputRef.current.value, {
         async onSuccess() {
-          inputRef.current!.value = "";
           await utils.board.getBoards.invalidate();
+          inputRef.current!.value = "";
           setShowCreateInput(false);
         },
       });
@@ -69,8 +69,8 @@ function CreateBoard() {
   };
 
   return (
-    <div className="mt-3">
-      {showCreateInput && (
+    <div className="shrink-0">
+      {showCreateInput ? (
         <div className={cn("animate-in fade-in zoom-in")}>
           <form onSubmit={handleSubmit} className={cn("px-4 pt-2")}>
             <Input
@@ -102,12 +102,11 @@ function CreateBoard() {
             </div>
           </form>
         </div>
-      )}
-
-      {!showCreateInput && (
+      ) : (
         <Button
-          className="gap-1 animate-in fade-in zoom-in hover:no-underline hover:opacity-[0.85]"
-          variant="link"
+          className="gap-1 text-primary animate-in fade-in zoom-in hover:text-primary hover:no-underline hover:opacity-[0.85]"
+          variant="ghost"
+          size="sm"
           onClick={() => {
             flushSync(() => {
               setShowCreateInput(true);

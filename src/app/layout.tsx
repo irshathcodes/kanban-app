@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import Sidebar from "@/components/sidebar";
 
-const inter = Inter({
+const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -26,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn("font-sans", inter.variable, "min-h-screen")}>
+      <body className={cn("min-h-screen font-sans", fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TRPCReactProvider cookies={cookies().toString()}>
             <div className="grid grid-cols-[270px_minmax(0,1fr)]">
