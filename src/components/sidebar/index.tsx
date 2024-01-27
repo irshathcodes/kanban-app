@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   ArrowLeftFromLine,
@@ -19,8 +19,13 @@ import {
 
 export default function Sidebar() {
   const [open, setOpen] = useState(true);
+  const mounted = useRef<boolean>(false);
 
   useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+    }
+
     const handleKeydown = (e: KeyboardEvent) => {
       if (e.key === "[") {
         setOpen((prev) => !prev);
@@ -37,8 +42,9 @@ export default function Sidebar() {
     <>
       <aside
         className={cn(
-          "sticky flex h-screen shrink-0 flex-col overflow-hidden border-r border-r-border bg-card text-card-foreground transition-[width]",
+          "sticky flex h-screen shrink-0 flex-col overflow-hidden border-r border-r-border bg-card text-card-foreground",
           open ? "w-[270px]" : "w-0",
+          mounted.current && open && "animate-in slide-in-from-left",
         )}
       >
         <div className="mt-4 flex items-center justify-between">
