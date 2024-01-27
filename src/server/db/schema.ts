@@ -97,11 +97,20 @@ export const boards = mysqlTable("board", {
   user_id: varchar("user_id", { length: 255 }),
 });
 
-export const columns = mysqlTable("column", {
-  column_id: int("column_id").autoincrement().primaryKey(),
-  name: varchar("name", { length: 255 }).notNull(),
-  board_id: int("board_id"),
-});
+export const columns = mysqlTable(
+  "column",
+  {
+    column_id: int("column_id").autoincrement().primaryKey(),
+    name: varchar("name", { length: 255 }).notNull(),
+    board_id: int("board_id"),
+    order: int("order").notNull(),
+  },
+  (table) => {
+    return {
+      boardIdx: index("board_idx").on(table.board_id),
+    };
+  },
+);
 
 export const tasks = mysqlTable("task", {
   task_id: int("task_id").autoincrement().primaryKey(),
