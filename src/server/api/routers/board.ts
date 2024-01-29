@@ -1,5 +1,6 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { boards, columns } from "@/server/db/schema";
+import { eq } from "drizzle-orm";
 import { z } from "zod";
 
 export const boardRouter = createTRPCRouter({
@@ -19,6 +20,9 @@ export const boardRouter = createTRPCRouter({
       ]);
     }),
   getBoards: protectedProcedure.query(async ({ ctx }) => {
-    return await ctx.db.select().from(boards);
+    return await ctx.db
+      .select()
+      .from(boards)
+      .where(eq(boards.user_id, ctx.session.user.id));
   }),
 });
