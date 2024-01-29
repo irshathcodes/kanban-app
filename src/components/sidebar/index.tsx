@@ -1,21 +1,16 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
 import {
   ArrowLeftFromLine,
   ArrowRightFromLine,
   KanbanSquare,
 } from "lucide-react";
-import Link from "next/link";
+import { cn } from "@/lib/utils";
 import { Boards } from "@/components/sidebar/boards";
 import { User } from "@/components/sidebar/user";
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import * as Tooltip from "@/components/ui/tooltip";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(true);
@@ -71,7 +66,6 @@ export default function Sidebar() {
         <div className="mt-12 min-h-0 flex-1">
           <Boards />
         </div>
-
         <div className="mt-8 shrink-0">
           <User />
         </div>
@@ -92,13 +86,13 @@ export default function Sidebar() {
 function SidebarTooltip(props: React.PropsWithChildren<{ open: boolean }>) {
   const content = props.open ? "Collapse sidebar" : "Open sidebar";
   return (
-    <TooltipProvider delayDuration={500}>
-      <Tooltip>
-        <TooltipTrigger asChild>{props.children}</TooltipTrigger>
-        <TooltipContent>
+    <Tooltip.Provider delayDuration={500}>
+      <Tooltip.Root>
+        <Tooltip.Trigger asChild>{props.children}</Tooltip.Trigger>
+        <Tooltip.Content>
           {content} <span className="border bg-muted px-1.5 py-0.5">{`[`}</span>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+        </Tooltip.Content>
+      </Tooltip.Root>
+    </Tooltip.Provider>
   );
 }
