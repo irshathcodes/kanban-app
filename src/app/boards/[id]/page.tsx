@@ -1,24 +1,16 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { api } from "@/trpc/react";
+import { BoardHeader } from "@/components/board/header";
+import { CardList } from "@/components/card/card-list";
 import { useParams } from "next/navigation";
 
 export default function Board() {
   const { id } = useParams();
-  const { data: boards } = api.board.getBoards.useQuery(undefined, {
-    enabled: false,
-  });
-  let boardName = "";
-
-  if (boards?.length) {
-    boardName = boards.find((board) => board.board_id === Number(id))?.name!;
-  }
+  const board_id = Number(id);
 
   return (
-    <div className="flex h-full flex-1">
-      <header className="h-[60px] w-full shrink-0 border-b bg-card p-4 text-lg font-semibold tracking-tight">
-        {boardName}
-      </header>
+    <div className="h-full flex-1">
+      <BoardHeader board_id={board_id} />
+      <CardList board_id={board_id} />
     </div>
   );
 }
