@@ -1,6 +1,7 @@
 import { boardRouter } from "@/server/api/routers/board";
 import { taskRouter } from "@/server/api/routers/task";
 import { createTRPCRouter } from "@/server/api/trpc";
+import { inferRouterOutputs } from "@trpc/server";
 
 /**
  * This is the primary router for your server.
@@ -14,3 +15,4 @@ export const appRouter = createTRPCRouter({
 
 // export type definition of API
 export type AppRouter = typeof appRouter;
+export type RouterOutput = inferRouterOutputs<AppRouter>;
