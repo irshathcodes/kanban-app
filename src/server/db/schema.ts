@@ -95,6 +95,8 @@ export const boards = mysqlTable("board", {
   board_id: int("board_id").autoincrement().primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   user_id: varchar("user_id", { length: 255 }),
+  created_at: timestamp("created_at").defaultNow(),
+  updated_at: timestamp("updated_at").defaultNow().onUpdateNow(),
 });
 
 export const columns = mysqlTable(
@@ -117,4 +119,6 @@ export const tasks = mysqlTable("task", {
   name: varchar("name", { length: 255 }).notNull(),
   column_id: int("column_id"),
   description: text("description"),
+  created_at: timestamp("created_at").defaultNow(),
+  updated_at: timestamp("updated_at").defaultNow().onUpdateNow(),
 });
