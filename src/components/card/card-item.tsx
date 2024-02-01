@@ -12,10 +12,10 @@ interface CardItemProps {
 export function CardItem(props: CardItemProps) {
   const [showAddForm, setShowAddForm] = useState(false);
   return (
-    <li className="w-80 rounded-lg border bg-card p-3 text-card-foreground">
+    <li className="flex h-fit max-h-full w-80 shrink-0 flex-col rounded-lg border bg-card text-card-foreground">
       <CardHeader column_name={props.data.column_name!} />
-      <div className="my-4">
-        <ul className="min-h-[200px] space-y-4">
+      <div className="flex-1 overflow-y-auto p-2">
+        <ul className="space-y-4">
           {props.data.tasks
             .filter((task) => task.name)
             .map((task) => (
@@ -28,7 +28,7 @@ export function CardItem(props: CardItemProps) {
             ))}
         </ul>
         {showAddForm && (
-          <div className="mt-4">
+          <div className="mt-2 p-2">
             <AddCardForm
               column_id={props.data.column_id}
               onSuccess={() => setShowAddForm(false)}
@@ -38,14 +38,16 @@ export function CardItem(props: CardItemProps) {
         )}
       </div>
       {!showAddForm && (
-        <Button
-          onClick={() => setShowAddForm(true)}
-          type="button"
-          className="w-full gap-1"
-          variant="ghost"
-        >
-          <Plus size={16} /> Add a card
-        </Button>
+        <div className="shrink-0 p-2">
+          <Button
+            onClick={() => setShowAddForm(true)}
+            type="button"
+            className="w-full gap-1"
+            variant="ghost"
+          >
+            <Plus size={16} /> Add a card
+          </Button>
+        </div>
       )}
     </li>
   );
@@ -53,7 +55,7 @@ export function CardItem(props: CardItemProps) {
 
 function CardHeader(props: { column_name: string }) {
   return (
-    <div>
+    <div className="shrink-0 p-3">
       <h1 className="font-semibold">{props.column_name}</h1>
     </div>
   );
@@ -92,7 +94,7 @@ function AddCardForm(props: {
         ref={inputRef}
         required
         name="card-name"
-        className="resize-none"
+        className="min-h-[50px] resize-none"
         onKeyDown={(e) => {
           if (e.key === "Escape") {
             props.onCancel();

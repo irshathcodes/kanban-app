@@ -8,7 +8,7 @@ export default function Board() {
   const board_id = Number(id);
 
   return (
-    <div className="h-full flex-1">
+    <div className="flex h-screen flex-1 flex-col">
       <BoardHeader board_id={board_id} />
       <CardList board_id={board_id} />
     </div>

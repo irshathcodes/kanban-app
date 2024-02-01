@@ -15,12 +15,10 @@ export function CardList(props: { board_id: number }) {
   }
 
   return (
-    <div className="m-6">
-      <ul className="flex gap-8">
-        {data.map((item) => (
-          <CardItem key={item.column_id} data={item} />
-        ))}
-      </ul>
-    </div>
+    <ul className="flex h-full flex-1 gap-8 overflow-auto p-4">
+      {data.map((item) => (
+        <CardItem key={item.column_id} data={item} />
+      ))}
+    </ul>
   );
 }
