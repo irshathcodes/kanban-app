@@ -6,18 +6,19 @@ import { Textarea } from "@/components/ui/textarea";
 import { api } from "@/trpc/react";
 
 interface CardItemProps {
-  data: RouterOutput["task"]["getColumnsWithTasks"][number];
+  column: RouterOutput["task"]["getColumnsAndTasks"]["columns"][number];
+  tasks: RouterOutput["task"]["getColumnsAndTasks"]["tasks"];
 }
 
 export function CardItem(props: CardItemProps) {
   const [showAddForm, setShowAddForm] = useState(false);
   return (
     <li className="flex h-fit max-h-full w-80 shrink-0 flex-col rounded-lg border bg-card text-card-foreground">
-      <CardHeader column_name={props.data.column_name!} />
+      <CardHeader column_name={props.column.name} />
       <div className="flex-1 overflow-y-auto p-2">
         <ul className="space-y-4">
-          {props.data.tasks
-            .filter((task) => task.name)
+          {props.tasks
+            .filter((task) => task.column_id === props.column.column_id)
             .map((task) => (
               <li
                 className="rounded-lg bg-background p-2.5 text-foreground"
@@ -30,7 +31,7 @@ export function CardItem(props: CardItemProps) {
         {showAddForm && (
           <div className="mt-2 p-2">
             <AddCardForm
-              column_id={props.data.column_id}
+              column_id={props.column.column_id}
               onSuccess={() => setShowAddForm(false)}
               onCancel={() => setShowAddForm(false)}
             />
@@ -68,6 +69,7 @@ function AddCardForm(props: {
 }) {
   const { mutate, isLoading } = api.task.createTask.useMutation();
   const utils = api.useUtils();
+  const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -89,7 +91,11 @@ function AddCardForm(props: {
   };
 
   return (
-    <form className="animate-in fade-in zoom-in" onSubmit={handleSubmit}>
+    <form
+      ref={formRef}
+      className="animate-in fade-in zoom-in"
+      onSubmit={handleSubmit}
+    >
       <Textarea
         ref={inputRef}
         required
@@ -98,6 +104,14 @@ function AddCardForm(props: {
         onKeyDown={(e) => {
           if (e.key === "Escape") {
             props.onCancel();
+          }
+          if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+            const form = formRef.current!;
+            if (typeof form.requestSubmit === "function") {
+              form.requestSubmit();
+            } else {
+              form.dispatchEvent(new Event("submit", { cancelable: true }));
+            }
           }
         }}
       ></Textarea>

@@ -1,6 +1,6 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
-import { columnsTable, tasksTable, boardsTable } from "@/server/db/schema";
-import { desc, eq, sql } from "drizzle-orm";
+import { columnsTable, tasksTable } from "@/server/db/schema";
+import { eq, inArray, sql } from "drizzle-orm";
 import { z } from "zod";
 
 export const taskRouter = createTRPCRouter({
@@ -12,18 +12,23 @@ export const taskRouter = createTRPCRouter({
         .values({ name: input.name, column_id: input.column_id });
     }),
 
-  getColumnsWithTasks: protectedProcedure
+  getColumnsAndTasks: protectedProcedure
     .input(z.number())
     .query(async ({ ctx, input }) => {
-      const res = await ctx.db
+      const columns = await ctx.db
         .select()
         .from(columnsTable)
-        .leftJoin(tasksTable, eq(columnsTable.column_id, tasksTable.column_id))
-        .where(eq(columnsTable.board_id, input))
-        .groupBy(sql`${columnsTable.column_id}`);
+        .where(eq(columnsTable.board_id, input));
 
-      console.log("res", res);
-
-      throw new Error("oops");
+      const tasks = await ctx.db
+        .select()
+        .from(tasksTable)
+        .where(
+          inArray(
+            tasksTable.column_id,
+            columns.map((col) => col.column_id),
+          ),
+        );
+      return { tasks, columns };
     }),
 });

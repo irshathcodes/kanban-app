@@ -2,7 +2,7 @@ import { CardItem } from "@/components/card/card-item";
 import { api } from "@/trpc/react";
 
 export function CardList(props: { board_id: number }) {
-  const { data, isLoading, isError } = api.task.getColumnsWithTasks.useQuery(
+  const { data, isLoading, isError } = api.task.getColumnsAndTasks.useQuery(
     props.board_id,
   );
 
@@ -16,8 +16,8 @@ export function CardList(props: { board_id: number }) {
 
   return (
     <ul className="flex h-full flex-1 gap-8 overflow-auto p-4">
-      {data.map((item) => (
-        <CardItem key={item.column_id} data={item} />
+      {data.columns.map((column) => (
+        <CardItem key={column.column_id} column={column} tasks={data.tasks} />
       ))}
     </ul>
   );
