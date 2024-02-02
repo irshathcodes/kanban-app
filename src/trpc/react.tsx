@@ -18,7 +18,9 @@ export function TRPCReactProvider(props: {
   const [queryClient] = useState(
     () =>
       new QueryClient({
-        defaultOptions: { queries: { refetchOnWindowFocus: false } },
+        defaultOptions: {
+          queries: { refetchOnWindowFocus: false, retry: false },
+        },
       }),
   );
 
