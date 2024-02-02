@@ -1,5 +1,5 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
-import { boards, columns } from "@/server/db/schema";
+import { boardsTable, columnsTable } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
@@ -9,20 +9,20 @@ export const boardRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       const user_id = ctx.session.user.id;
       const newBoard = await ctx.db
-        .insert(boards)
+        .insert(boardsTable)
         .values({ user_id, name: input });
 
       const board_id = Number(newBoard.insertId);
-      await ctx.db.insert(columns).values([
-        { board_id, name: "todo", order: 0 },
-        { board_id, name: "doing", order: 1 },
-        { board_id, name: "done", order: 2 },
+      await ctx.db.insert(columnsTable).values([
+        { board_id, name: "Todo", order: 0 },
+        { board_id, name: "Doing", order: 1 },
+        { board_id, name: "Done", order: 2 },
       ]);
     }),
   getBoards: protectedProcedure.query(async ({ ctx }) => {
     return await ctx.db
       .select()
-      .from(boards)
-      .where(eq(boards.user_id, ctx.session.user.id));
+      .from(boardsTable)
+      .where(eq(boardsTable.user_id, ctx.session.user.id));
   }),
 });

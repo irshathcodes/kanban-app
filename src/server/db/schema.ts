@@ -91,7 +91,7 @@ export const verificationTokens = mysqlTable(
   }),
 );
 
-export const boards = mysqlTable("board", {
+export const boardsTable = mysqlTable("board", {
   board_id: int("board_id").autoincrement().primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   user_id: varchar("user_id", { length: 255 }),
@@ -99,7 +99,7 @@ export const boards = mysqlTable("board", {
   updated_at: timestamp("updated_at").defaultNow().onUpdateNow(),
 });
 
-export const columns = mysqlTable(
+export const columnsTable = mysqlTable(
   "column",
   {
     column_id: int("column_id").autoincrement().primaryKey(),
@@ -114,7 +114,7 @@ export const columns = mysqlTable(
   },
 );
 
-export const tasks = mysqlTable("task", {
+export const tasksTable = mysqlTable("task", {
   task_id: int("task_id").autoincrement().primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   column_id: int("column_id"),
